@@ -9,6 +9,51 @@ public class Pothole {
     private BigDecimal latitude;
     private BigDecimal longitude;
     private String imageUrl;
+    private String crossStreet1;
+    private String crossStreet2;
+    private String contactName;
+    private String contactEmail;
+    private String contactPhone;
+
+    public String getCrossStreet1() {
+        return crossStreet1;
+    }
+
+    public void setCrossStreet1(String crossStreet1) {
+        this.crossStreet1 = crossStreet1;
+    }
+
+    public String getCrossStreet2() {
+        return crossStreet2;
+    }
+
+    public void setCrossStreet2(String crossStreet2) {
+        this.crossStreet2 = crossStreet2;
+    }
+
+    public String getContactName() {
+        return contactName;
+    }
+
+    public void setContactName(String contactName) {
+        this.contactName = contactName;
+    }
+
+    public String getContactEmail() {
+        return contactEmail;
+    }
+
+    public void setContactEmail(String contactEmail) {
+        this.contactEmail = contactEmail;
+    }
+
+    public String getContactPhone() {
+        return contactPhone;
+    }
+
+    public void setContactPhone(String contactPhone) {
+        this.contactPhone = contactPhone;
+    }
 
     public int getPotholeId() {
         return potholeId;
