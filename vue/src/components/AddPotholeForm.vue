@@ -35,6 +35,7 @@
 <script>
 import PotholeService from "../services/PotholeService";
 export default {
+  name: "add-pothole",
   data() {
     return {
       newPothole: {
@@ -70,11 +71,10 @@ export default {
   font-size: 0.5em;
   letter-spacing: 0.125em;
   background-color: #42484d51;
-  color: #030303 ;
+  color: #030303;
 }
 div.form-element {
   margin-top: 10px;
-  
 }
 div.form-element > label {
   font-size: 10pt;

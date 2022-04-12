@@ -4,6 +4,8 @@
       <div class="logo">
         <img src="../assets/images/pothole_tracker_logo.png" alt="Logo" />
       </div>
+      <add-pothole v-if="showForm" />
+
       <div
         class="pothole-list"
         v-for="pothole in potholes"
@@ -22,7 +24,12 @@
       </div>
     </div>
     <div id="map">
-      <l-map style="width: 100%" :zoom="zoom" :center="center">
+      <l-map
+        v-on:click="onMapClick"
+        style="width: 100%"
+        :zoom="zoom"
+        :center="center"
+      >
         <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
         <l-marker
           v-for="pothole in potholes"
@@ -37,6 +44,12 @@
             {{ pothole.dateReported }}</l-popup
           >
         </l-marker>
+        <l-marker :lat-lng="[lat, lng]" v-if="showForm"
+          ><lIcon
+            icon-url="https://i.postimg.cc/rmwdTRPL/imageedit-1-9960213275.png"
+            :icon-size="[40, 40]"
+          ></lIcon
+        ></l-marker>
       </l-map>
     </div>
   </div>
@@ -45,6 +58,7 @@
 <script>
 import { LMap, LTileLayer, LMarker, LIcon, LPopup } from "vue2-leaflet";
 import PotholeService from "../services/PotholeService.js";
+import AddPothole from "../components/AddPotholeForm.vue";
 export default {
   name: "pothole-map",
   components: {
@@ -53,6 +67,7 @@ export default {
     LMarker,
     LIcon,
     LPopup,
+    AddPothole,
   },
   data() {
     return {
@@ -69,6 +84,9 @@ export default {
         imageUrl: "",
       },
       potholes: {},
+      showForm: false,
+      lat: "",
+      lng: "",
     };
   },
   methods: {
@@ -76,6 +94,13 @@ export default {
       PotholeService.list().then((response) => {
         this.potholes = response.data;
       });
+    },
+    onMapClick(e) {
+      console.log(e.latlng.lat);
+      console.log(e.latlng.lng);
+      this.showForm = true;
+      this.lat = e.latlng.lat;
+      this.lng = e.latlng.lng;
     },
   },
   created() {
