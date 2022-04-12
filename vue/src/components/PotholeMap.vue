@@ -4,7 +4,7 @@
       <div class="logo">
         <img src="../assets/images/pothole_tracker_logo.png" alt="Logo" />
       </div>
-
+      <h1 v-if="!showForm">Click on the Map to Report a Pothole</h1>
       <div>
         <form
           class="pothole-form"
@@ -14,7 +14,7 @@
           <!-- v-show keeps it in the DOM, but adds display: none. This is ALWAYS a good idea for forms -->
           <h2>Report Form</h2>
           <div class="reportForm">
-            <div class="form-element">
+            <div>
               <input
                 id="crossStreet1"
                 type="text"
@@ -31,11 +31,11 @@
               <label for="crossStreet2">Nearest Cross Street:</label>
             </div>
 
-            <div class="form-element">
+            <!-- <div >
               <input id="date" type="date" v-model="newPothole.dateReported" />
               <label for="date">Date Reported:</label>
-            </div>
-            <div class="form-element">
+            </div> -->
+            <div>
               <input
                 type="text"
                 id="contactName"
@@ -71,7 +71,8 @@
         v-for="pothole in potholes"
         v-bind:key="pothole.potholeId"
       >
-        <h1>🔍{{ pothole.dateReported }}</h1>
+        <h1>🔍Nearest Intersection:</h1>
+        <h1>{{ pothole.crossStreet1 }} & {{ pothole.crossStreet2 }}</h1>
       </div>
       <div class="option-2">
         <div
@@ -79,7 +80,7 @@
           v-for="pothole in potholes"
           v-bind:key="pothole.potholeId"
         >
-          <h1>🔍{{ pothole.dateReported }}</h1>
+          <h1>🔍 {{ pothole.dateReported }}</h1>
         </div>
       </div>
     </div>
@@ -166,6 +167,13 @@ export default {
       });
     },
     onMapClick(e) {
+      const today = new Date();
+      const reportedDate =
+        today.getFullYear() +
+        "-0" +
+        (today.getMonth() + 1) +
+        "-" +
+        today.getDate();
       console.log(e.latlng.lat);
       console.log(e.latlng.lng);
       this.showForm = true;
@@ -173,11 +181,15 @@ export default {
       this.lng = e.latlng.lng;
       this.newPothole.latitude = e.latlng.lat;
       this.newPothole.longitude = e.latlng.lng;
+      this.newPothole.dateReported = reportedDate;
     },
     submitForm() {
       PotholeService.add(this.newPothole).then((response) => {
         if (response.status === 201 || response.status === 200) {
           console.log("success");
+          this.getPotholes();
+          alert("This has been successfully added!");
+          this.newPothole = {};
         }
       });
       this.showForm = false;
@@ -193,7 +205,7 @@ export default {
 <style scoped>
 .pothole-form {
   border-radius: 5px;
-  padding: 2.5em 7.25em;
+  padding: 2.5em 7.25em 2.5em 4em;
   margin-bottom: 1.75em;
   font-size: 0.5em;
   letter-spacing: 0.125em;
@@ -220,7 +232,7 @@ input {
   background-color: rgba(255, 255, 255, 0.5);
   border: none;
   border-bottom: 3px solid transparent;
-  width: 0%;
+  width: 80%;
   display: block;
 }
 
