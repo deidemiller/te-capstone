@@ -12,7 +12,7 @@
       Select the number of characters, words, sentences or paragraphs, and hit
       generate!
     </p>
-    <button class="header_button">
+    <button class="header_button" >
       Report Pothole
     </button>
   </div>

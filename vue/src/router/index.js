@@ -5,7 +5,8 @@ import Login from "../views/Login.vue";
 import Logout from "../views/Logout.vue";
 import Register from "../views/Register.vue";
 import store from "../store/index";
-import PoteholeMap from "../views/PotholeMapView.vue";
+import PotholeMap from "../views/PotholeMapView.vue";
+import Form from "../views/Form.vue"
 
 Vue.use(Router);
 
@@ -57,7 +58,15 @@ const router = new Router({
     {
       path: "/potholes",
       name: "potholes",
-      component: PoteholeMap,
+      component: PotholeMap,
+      meta: {
+        requiresAuth: false,
+      },
+    },
+    {
+      path: "/form",
+      name: "pothole-form",
+      component: Form,
       meta: {
         requiresAuth: false,
       },

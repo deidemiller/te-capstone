@@ -1,5 +1,6 @@
 <template>
   <div>
+    
     <pothole-map />
   </div>
 </template>
