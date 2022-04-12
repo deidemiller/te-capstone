@@ -13,7 +13,7 @@ export default {
   components: {
     AddPotholeForm,
   },
-  name: "pothole-form",
+  name: "form",
 };
 </script>
 

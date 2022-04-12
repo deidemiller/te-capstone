@@ -7,4 +7,7 @@ export default {
   list() {
     return http.get("/potholes");
   },
+  add(pothole) {
+    return http.post('/potholes/add', pothole);
+  }
 };

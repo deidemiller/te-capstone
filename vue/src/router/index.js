@@ -65,7 +65,7 @@ const router = new Router({
     },
     {
       path: "/form",
-      name: "pothole-form",
+      name: "form",
       component: Form,
       meta: {
         requiresAuth: false,

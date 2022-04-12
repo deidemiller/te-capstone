@@ -1,5 +1,5 @@
 <template>
-  <form v-on:submit.prevent="handleSave">
+  <form v-on:submit.prevent="submitForm">
     <!-- v-show keeps it in the DOM, but adds display: none. This is ALWAYS a good idea for forms -->
     <div class="form-element">
       <label for="crossStreet1">Street:</label>
@@ -8,8 +8,14 @@
       <input id="crossStreet2" type="text" v-model="newPothole.crossStreet2" />
     </div>
     <div class="form-element">
+      <label for ="latitude">Latitude</label>
+      <input id="latitude" type="decimal" v-model="newPothole.latitude" />
+      <label for="longitude">Longitude</label>
+      <input id="longitude" type="decimal" v-model="newPothole.longitude" />
+    </div>
+    <div class="form-element">
       <label for="date">Date Reported:</label>
-      <input id="date" type="text" v-model="newPothole.dateReported" />
+      <input id="date" type="date" v-model="newPothole.dateReported" />
       <!-- input as Date -->
     </div>
     <div class="form-element">
@@ -24,17 +30,14 @@
       <label for="contactPhone">Contact Phone:</label>
       <textarea id="contactPhone" v-model="newPothole.contactPhone"></textarea>
     </div>
-    <input type="submit" value="Save" v-bind:disabled="isSaveDisabled" />
+    <input type="submit" value="Save" />
     <!-- v-on:click.prevent="handleSave" -->
-    <input
-      type="button"
-      value="Cancel"
-      v-on:click="$store.commit('TOGGLE_ADD_FORM_VISIBLE')"
-    />
+    <input type="button" value="Cancel" />
   </form>
 </template>
 
 <script>
+import PotholeService from "../services/PotholeService";
 export default {
   data() {
     return {
@@ -50,36 +53,13 @@ export default {
       },
     };
   },
-  computed: {
-    isSaveDisabled() {
-      return this.newReview.title === "";
-    },
-  },
+  computed: {},
   methods: {
-    handleSave(event) {
-      console.log("Save was clicked!", event);
-
-      // Identify an object representing the new review
-      let reviewToAdd = this.newReview;
-
-      // Add the new review to the reviews array (at the beginning)
-      this.$store.commit("ADD_REVIEW", reviewToAdd);
-
-      // Clear the form for the next addition (and prevents odd bugs in adding data multiple times)
-      this.newReview = {
-        rating: 1,
-        title: "",
-        review: "",
-        reviewer: "",
-      };
-
-      // Hide the form
-      this.$store.commit("TOGGLE_ADD_FORM_VISIBLE");
-
-      // Navigate to the new review
-      this.$router.push({
-        name: "ReviewDetails",
-        params: { reviewer: reviewToAdd.reviewer },
+    submitForm() {
+      PotholeService.add(this.newPothole).then((response) => {
+        if (response.status === 201 || response.status === 200) {
+          this.$router.push("/potholes");
+        }
       });
     },
   },
