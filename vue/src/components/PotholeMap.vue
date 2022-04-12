@@ -4,51 +4,66 @@
       <div class="logo">
         <img src="../assets/images/pothole_tracker_logo.png" alt="Logo" />
       </div>
+
       <div>
-        <form class="pothole-form" v-on:submit.prevent="submitForm">
+        <form
+          class="pothole-form"
+          v-on:submit.prevent="submitForm"
+          v-if="showForm"
+        >
           <!-- v-show keeps it in the DOM, but adds display: none. This is ALWAYS a good idea for forms -->
-          <div class="form-element">
-            <input
-              id="crossStreet1"
-              type="text"
-              v-model="newPothole.crossStreet1"
-            />
-            <label for="crossStreet1">Street:</label>
-            <input
-              id="crossStreet2"
-              type="text"
-              v-model="newPothole.crossStreet2"
-            />
-            <label for="crossStreet2">Nearest Cross Street:</label>
+          <h2>Report Form</h2>
+          <div class="reportForm">
+            <div class="form-element">
+              <input
+                id="crossStreet1"
+                type="text"
+                v-model="newPothole.crossStreet1"
+                placeholder="Street:"
+              />
+              <label for="crossStreet1">Street:</label>
+              <input
+                id="crossStreet2"
+                type="text"
+                v-model="newPothole.crossStreet2"
+                placeholder="Nearest Cross Street:"
+              />
+              <label for="crossStreet2">Nearest Cross Street:</label>
+            </div>
+
+            <div class="form-element">
+              <input id="date" type="date" v-model="newPothole.dateReported" />
+              <label for="date">Date Reported:</label>
+            </div>
+            <div class="form-element">
+              <input
+                type="text"
+                id="contactName"
+                v-model="newPothole.contactName"
+                placeholder="Contact Name:"
+              />
+              <label for="contactName">Contact Name:</label>
+              <input
+                id="contactEmail"
+                type="email"
+                v-model="newPothole.contactEmail"
+                placeholder="Contact Email:"
+              />
+              <label for="contactEmail">Contact Email:</label>
+              <input
+                type="text"
+                id="contactPhone"
+                v-model="newPothole.contactPhone"
+                placeholder="Contact Phone:"
+              />
+              <label for="contactPhone">Contact Phone:</label>
+            </div>
           </div>
-          
-          <div class="form-element">
-            <input id="date" type="date" v-model="newPothole.dateReported" />
-            <label for="date">Date Reported:</label>
-          </div>
-          <div class="form-element">
-            <input
-              type="text"
-              id="contactName"
-              v-model="newPothole.contactName"
-            />
-            <label for="contactName">Contact Name:</label>
-            <input
-              id="contactEmail"
-              type="email"
-              v-model="newPothole.contactEmail"
-            />
-            <label for="contactEmail">Contact Email:</label>
-            <input
-              type="text"
-              id="contactPhone"
-              v-model="newPothole.contactPhone"
-            />
-            <label for="contactPhone">Contact Phone:</label>
-          </div>
-          <input type="submit" value="Save" />
+          <!-- <input type="submit" value="Save" /> -->
           <!-- v-on:click.prevent="handleSave" -->
-          <input type="button" value="Cancel" />
+          <!-- <input type="button" value="Cancel" /> -->
+          <button class="button-73" type="submit">Save</button>
+          <button class="button-73">Cancel</button>
         </form>
       </div>
       <div
@@ -129,6 +144,7 @@ export default {
       },
       potholes: {},
       showForm: false,
+
       lat: "",
       lng: "",
       newPothole: {
@@ -142,7 +158,6 @@ export default {
         longitude: "",
       },
     };
-    
   },
   methods: {
     getPotholes() {
@@ -162,9 +177,11 @@ export default {
     submitForm() {
       PotholeService.add(this.newPothole).then((response) => {
         if (response.status === 201 || response.status === 200) {
-          console.log('success');
+          console.log("success");
         }
       });
+      this.showForm = false;
+      this.add = true;
     },
   },
   created() {
@@ -176,14 +193,14 @@ export default {
 <style scoped>
 .pothole-form {
   border-radius: 5px;
-  padding: 1.5em 2.25em;
+  padding: 2.5em 7.25em;
   margin-bottom: 1.75em;
   font-size: 0.5em;
   letter-spacing: 0.125em;
-  background-color: #42484d51;
+  background-color: #42484d44;
   color: #030303;
 }
-div.form-element {
+/* div.form-element {
   margin-top: 10px;
 }
 div.form-element > label {
@@ -194,14 +211,102 @@ div.form-element > input,
 div.form-element > select {
   height: 15px;
   width: 300px;
+} */
+input {
+  font-size: 1rem;
+
+  padding: 1rem 2.5rem;
+  border-radius: 2px;
+  background-color: rgba(255, 255, 255, 0.5);
+  border: none;
+  border-bottom: 3px solid transparent;
+  width: 0%;
+  display: block;
 }
-form > input[type="button"] {
+
+input:focus {
+  outline: none;
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.1);
+  border-bottom: 3px solid #2978b5;
+}
+input:focus:invalid {
+  border-bottom: 3px solid #fc5404;
+}
+input::-webkit-input-placeholder {
+  color: #888;
+  text-align: left;
+  font-weight: 400;
+}
+input:placeholder-shown + label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  margin-left: 1.25rem;
+  margin-top: 0.4rem;
+  display: block;
+  transform: translateY(-2.5rem);
+  opacity: 0;
+  visibility: hidden;
+}
+label {
+  opacity: 0;
+}
+h2 {
+  font-size: 2.5em;
+  padding-bottom: 0.5em;
+}
+h3 {
+  font-size: 2em;
+  font-weight: 400;
+}
+.button-73 {
+  appearance: none;
+  background-color: #ffffff;
+  border-radius: 40em;
+  border-style: none;
+  box-shadow: #adcfff 0 -12px 6px inset;
+  box-sizing: border-box;
+  color: #000000;
+  cursor: pointer;
+  display: inline-block;
+  font-family: -apple-system, sans-serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: -0.24px;
+  margin: 1em;
+  outline: none;
+  padding: 1rem 1.3rem;
+  quotes: auto;
+  text-align: center;
+  text-decoration: none;
+  transition: all 0.15s;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button-73:hover {
+  background-color: #ffc229;
+  box-shadow: #ff6314 0 -6px 8px inset;
+  transform: scale(1.125);
+}
+
+.button-73:active {
+  transform: scale(1.025);
+}
+
+@media (min-width: 768px) {
+  .button-73 {
+    font-size: 1.5rem;
+    padding: 0.75rem 2rem;
+  }
+}
+/* form > input[type="button"] {
   width: 100px;
 }
 form > input[type="submit"] {
   width: 100px;
   margin-right: 10px;
-}
+} */
 
 #container {
   display: flex;
@@ -214,6 +319,7 @@ form > input[type="submit"] {
   overflow-x: hidden;
   padding: 0.5em 1em 0.5em 1em;
 }
+
 .logo {
   margin: 0 auto;
   width: 10em;

@@ -12,9 +12,13 @@
       Select the number of characters, words, sentences or paragraphs, and hit
       generate!
     </p>
-    <button class="header_button" >
-      Report Pothole
-    </button>
+
+    <router-link
+      tag="button"
+      class="header_button"
+      v-bind:to="{ name: 'potholes' }"
+      >Report Pothole</router-link
+    >
   </div>
 </template>
 
@@ -24,7 +28,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 #header {
   background-attachment: scroll, scroll, fixed;
   background-image: url("../assets/images/top-3200.svg"),
