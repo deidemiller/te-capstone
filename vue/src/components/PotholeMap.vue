@@ -63,7 +63,7 @@
           <!-- v-on:click.prevent="handleSave" -->
           <!-- <input type="button" value="Cancel" /> -->
           <button class="button-73" type="submit">Save</button>
-          <button class="button-73">Cancel</button>
+          <button class="button-73" v-on:click.prevent="clearForm">Cancel</button>
         </form>
       </div>
       <div
@@ -148,16 +148,7 @@ export default {
 
       lat: "",
       lng: "",
-      newPothole: {
-        dateReported: "", // v-model="newReview.title"
-        contactName: "",
-        contactEmail: "",
-        contactPhone: "",
-        crossStreet1: "",
-        crossStreet2: "",
-        latitude: "",
-        longitude: "",
-      },
+      newPothole: {},
     };
   },
   methods: {
@@ -188,13 +179,18 @@ export default {
         if (response.status === 201 || response.status === 200) {
           console.log("success");
           this.getPotholes();
-          alert("This has been successfully added!");
+          alert("This has been successfully added! Thank you for helping to make our roads safer!");
           this.newPothole = {};
         }
+        
       });
       this.showForm = false;
       this.add = true;
     },
+    clearForm() {
+      this.newPothole = {};
+      this.showForm = ! this.showForm;
+    }
   },
   created() {
     this.getPotholes();
