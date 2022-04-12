@@ -179,7 +179,7 @@ export default {
         if (response.status === 201 || response.status === 200) {
           console.log("success");
           this.getPotholes();
-          alert("This has been successfully added! Thank you for helping to make our roads safer!");
+          alert("This has been successfully added! Thank you for helping make our roads safer!");
           this.newPothole = {};
         }
         
