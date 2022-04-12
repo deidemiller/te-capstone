@@ -18,7 +18,7 @@
         required
       />
       <ul class="actions special">
-        <li><a href="#" class="button">Join our crew</a></li>
+        <li><a href="#" class="button">Subscribe</a></li>
       </ul>
     </form>
   </div>
