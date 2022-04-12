@@ -16,7 +16,6 @@
     <div class="form-element">
       <input id="date" type="date" v-model="newPothole.dateReported" />
       <label for="date">Date Reported:</label>
-      <!-- input as Date -->
     </div>
     <div class="form-element">
       <input type="text" id="contactName" v-model="newPothole.contactName" />
@@ -65,7 +64,7 @@ export default {
 
 <style>
 .pothole-form {
-  border-radius: 25px;
+  border-radius: 5px;
   padding: 1.5em 2.25em;
   margin-bottom: 1.75em;
   font-size: 0.5em;
@@ -83,10 +82,6 @@ div.form-element > label {
 div.form-element > input,
 div.form-element > select {
   height: 15px;
-  width: 300px;
-}
-div.form-element > textarea {
-  height: 25px;
   width: 300px;
 }
 form > input[type="button"] {
