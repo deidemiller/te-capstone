@@ -4,6 +4,9 @@
       <div class="logo">
         <img src="../assets/images/pothole_tracker_logo.png" alt="Logo" />
       </div>
+      <div>
+              <add-pothole-form/>
+      </div>
       <div
         class="pothole-list"
         v-for="pothole in potholes"
@@ -45,9 +48,11 @@
 <script>
 import { LMap, LTileLayer, LMarker, LIcon, LPopup } from "vue2-leaflet";
 import PotholeService from "../services/PotholeService.js";
+import AddPotholeForm from "../components/AddPotholeForm.vue";
 export default {
   name: "pothole-map",
   components: {
+    AddPotholeForm,
     LMap,
     LTileLayer,
     LMarker,
