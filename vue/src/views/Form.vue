@@ -9,6 +9,7 @@
 
 <script>
 import AddPotholeForm from "../components/AddPotholeForm.vue";
+
 export default {
   components: {
     AddPotholeForm,
