@@ -6,7 +6,7 @@ import Logout from "../views/Logout.vue";
 import Register from "../views/Register.vue";
 import store from "../store/index";
 import PotholeMap from "../views/PotholeMapView.vue";
-import Form from "../views/Form.vue"
+import DashBoard from "../views/DashBoardView.vue";
 
 Vue.use(Router);
 
@@ -64,9 +64,9 @@ const router = new Router({
       },
     },
     {
-      path: "/form",
-      name: "form",
-      component: Form,
+      path: "/dashboard",
+      name: "dashboard",
+      component: DashBoard,
       meta: {
         requiresAuth: false,
       },

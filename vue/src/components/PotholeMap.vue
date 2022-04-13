@@ -4,8 +4,12 @@
       <div class="logo">
         <img src="../assets/images/pothole_tracker_logo.png" alt="Logo" />
       </div>
-      <h1 v-if="!showForm">Click on the Map to Report a Pothole</h1>
+      <h3 v-if="!showForm">Click on the Map to Report a Pothole</h3>
       <div>
+        <div class="pending-button">
+          <h4>Show Pending Potholes:</h4>
+          <input type="checkbox" />
+        </div>
         <form
           class="pothole-form"
           v-on:submit.prevent="submitForm"
@@ -30,11 +34,15 @@
               />
               <label for="crossStreet2">Nearest Cross Street:</label>
             </div>
-
-            <!-- <div >
-              <input id="date" type="date" v-model="newPothole.dateReported" />
-              <label for="date">Date Reported:</label>
-            </div> -->
+            <div class="severity">
+              <h1>Choose Severity:</h1>
+              <label for="severity">Choose Severity:</label>
+              <select name="severity" id="severity">
+                <option value="low">Low</option>
+                <option value="moderate">Moderate</option>
+                <option value="high">High</option>
+              </select>
+            </div>
             <div>
               <input
                 type="text"
@@ -59,11 +67,12 @@
               <label for="contactPhone">Contact Phone:</label>
             </div>
           </div>
-          <!-- <input type="submit" value="Save" /> -->
-          <!-- v-on:click.prevent="handleSave" -->
-          <!-- <input type="button" value="Cancel" /> -->
-          <button class="button-73" type="submit">Save</button>
-          <button class="button-73" v-on:click.prevent="clearForm">Cancel</button>
+          <div class="buttons">
+            <button class="button-80" type="submit">Save</button>
+            <button class="button-80" v-on:click.prevent="clearForm">
+              Cancel
+            </button>
+          </div>
         </form>
       </div>
       <div
@@ -73,15 +82,6 @@
       >
         <h1>🔍Nearest Intersection:</h1>
         <h1>{{ pothole.crossStreet1 }} & {{ pothole.crossStreet2 }}</h1>
-      </div>
-      <div class="option-2">
-        <div
-          class="pothole-list2"
-          v-for="pothole in potholes"
-          v-bind:key="pothole.potholeId"
-        >
-          <h1>🔍 {{ pothole.dateReported }}</h1>
-        </div>
       </div>
     </div>
     <div id="map">
@@ -134,7 +134,7 @@ export default {
       url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
       attribution:
         '&copy; <a target="_blank" href="http://osm.org/copyright">OpenStreetMap</a> contributors',
-      zoom: 10,
+      zoom: 13,
       center: [39.961178, -82.998795],
       pothole: {
         potholeId: "",
@@ -179,18 +179,19 @@ export default {
         if (response.status === 201 || response.status === 200) {
           console.log("success");
           this.getPotholes();
-          alert("This has been successfully added! Thank you for helping make our roads safer!");
+          alert(
+            "This has been successfully added! Thank you for helping make our roads safer!"
+          );
           this.newPothole = {};
         }
-        
       });
       this.showForm = false;
       this.add = true;
     },
     clearForm() {
       this.newPothole = {};
-      this.showForm = ! this.showForm;
-    }
+      this.showForm = !this.showForm;
+    },
   },
   created() {
     this.getPotholes();
@@ -222,7 +223,6 @@ div.form-element > select {
 } */
 input {
   font-size: 1rem;
-
   padding: 1rem 2.5rem;
   border-radius: 2px;
   background-color: rgba(255, 255, 255, 0.5);
@@ -235,7 +235,6 @@ input {
 input:focus {
   outline: none;
   box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.1);
-  border-bottom: 3px solid #2978b5;
 }
 input:focus:invalid {
   border-bottom: 3px solid #fc5404;
@@ -258,64 +257,135 @@ input:placeholder-shown + label {
 label {
   opacity: 0;
 }
+
 h2 {
   font-size: 2.5em;
   padding-bottom: 0.5em;
 }
 h3 {
-  font-size: 2em;
-  font-weight: 400;
+  font-size: 1.5em;
+  font-weight: 700;
+  text-align: center;
+  text-shadow: 2px 2px #888;
 }
-.button-73 {
-  appearance: none;
-  background-color: #ffffff;
-  border-radius: 40em;
-  border-style: none;
-  box-shadow: #adcfff 0 -12px 6px inset;
+.severity {
+  display: flex;
+  margin-bottom: 1.5em;
+}
+.severity h1 {
+  width: 70%;
+}
+#severity {
+  font-size: 1rem;
+  padding: 1rem 2.5rem;
+  border-radius: 2px;
+  background-color: rgba(255, 255, 255, 0.5);
+  border: none;
+  border-bottom: 3px solid transparent;
+  width: 90%;
+  display: block;
+}
+.buttons {
+  display: flex;
+  align-content: center;
+  justify-content: space-evenly;
+}
+.button-80 {
+  background: #fff;
+  backface-visibility: hidden;
+  border-radius: 0.375rem;
+  border-style: solid;
+  border-width: 0.125rem;
   box-sizing: border-box;
-  color: #000000;
+  color: #212121;
   cursor: pointer;
   display: inline-block;
-  font-family: -apple-system, sans-serif;
-  font-size: 1.2rem;
+  font-family: Circular, Helvetica, sans-serif;
+  font-size: 1.125rem;
   font-weight: 700;
-  letter-spacing: -0.24px;
-  margin: 1em;
-  outline: none;
-  padding: 1rem 1.3rem;
-  quotes: auto;
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+  padding: 0.875rem 1.125rem;
+
   text-align: center;
   text-decoration: none;
-  transition: all 0.15s;
+  transform: translateZ(0) scale(1);
+  transition: transform 0.2s;
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
 }
 
-.button-73:hover {
-  background-color: #ffc229;
-  box-shadow: #ff6314 0 -6px 8px inset;
-  transform: scale(1.125);
+.button-80:not(:disabled):hover {
+  transform: scale(1.05);
 }
 
-.button-73:active {
-  transform: scale(1.025);
+.button-80:not(:disabled):hover:active {
+  transform: scale(1.05) translateY(0.125rem);
 }
 
-@media (min-width: 768px) {
-  .button-73 {
-    font-size: 1.5rem;
-    padding: 0.75rem 2rem;
-  }
+.button-80:focus {
+  outline: 0 solid transparent;
 }
-/* form > input[type="button"] {
-  width: 100px;
-}
-form > input[type="submit"] {
-  width: 100px;
-  margin-right: 10px;
-} */
 
+.button-80:focus:before {
+  content: "";
+  left: calc(-1 * 0.375rem);
+  pointer-events: none;
+  position: absolute;
+  top: calc(-1 * 0.375rem);
+  transition: border-radius;
+  user-select: none;
+}
+
+.button-80:focus:not(:focus-visible) {
+  outline: 0 solid transparent;
+}
+
+.button-80:focus:not(:focus-visible):before {
+  border-width: 0;
+}
+
+.button-80:not(:disabled):active {
+  transform: translateY(0.125rem);
+}
+.pending-button {
+  display: flex;
+  vertical-align: baseline;
+  justify-content: space-evenly;
+  align-content: center;
+  align-items: baseline;
+  padding: 0.5em 3em;
+}
+h4 {
+  font-size: 1.2em;
+}
+input[type="checkbox"] {
+  width: 2em;
+  height: 1em;
+  appearance: none;
+  outline: none;
+  border-radius: 20px;
+  position: relative;
+  transform: translateY(10px);
+}
+input:checked[type="checkbox"] {
+  background: #2978b5;
+}
+input[type="checkbox"]:before {
+  content: "";
+  position: absolute;
+  width: 2em;
+  height: 2em;
+  border-radius: 50%;
+  top: 0;
+  left: 0;
+  background-color: #fff;
+  transform: scale(1.1);
+}
+input:checked[type="checkbox"]:before {
+  left: 3em;
+}
 #container {
   display: flex;
 }
@@ -347,18 +417,5 @@ img {
   font-size: 0.5em;
   letter-spacing: 0.125em;
   background-color: #42484d51;
-}
-.option-2 {
-  border-radius: 5px;
-  padding: 1.5em 2.25em;
-  margin-bottom: 1.75em;
-  font-size: 0.5em;
-  letter-spacing: 0.125em;
-  background-color: #42484d51;
-  overflow-y: scroll;
-  overflow-x: hidden;
-  height: 100px;
-  width: 80%;
-  margin: 0 auto;
 }
 </style>
