@@ -14,6 +14,24 @@ public class Pothole {
     private String contactName;
     private String contactEmail;
     private String contactPhone;
+    private boolean isPending;
+    private int severity;
+
+    public boolean isPending() {
+        return isPending;
+    }
+
+    public void setPending(boolean pending) {
+        isPending = pending;
+    }
+
+    public int getSeverity() {
+        return severity;
+    }
+
+    public void setSeverity(int severity) {
+        this.severity = severity;
+    }
 
     public String getCrossStreet1() {
         return crossStreet1;

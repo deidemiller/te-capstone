@@ -21,25 +21,15 @@ public class JdbcPotholeDao  implements PotholeDao{
     public List<Pothole> getAllPotholes() {
         List<Pothole> potholeList = new ArrayList<>();
 
-        String sql = "SELECT pothole_id, date_reported, latitude, longitude, image_location, cross_street_1, cross_street_2, contact_name, contact_email, contact_phone " +
+        String sql = "SELECT pothole_id, date_reported, latitude, longitude, image_location, cross_street_1, cross_street_2, contact_name, contact_email, contact_phone, " +
+                "pending, severity " +
                 "FROM pothole";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
 
         while(results.next()) {
-            Pothole pothole = new Pothole();
-            pothole.setPotholeId(results.getInt("pothole_id"));
-            pothole.setDateReported(results.getDate("date_reported"));
-            pothole.setLatitude(results.getBigDecimal("latitude").setScale(6));
-            pothole.setLongitude(results.getBigDecimal("longitude").setScale(6));
-            pothole.setImageUrl(results.getString("image_location"));
-            pothole.setCrossStreet1(results.getString("cross_street_1"));
-            pothole.setCrossStreet2(results.getString("cross_street_2"));
-            pothole.setContactName(results.getString("contact_name"));
-            pothole.setContactEmail(results.getString("contact_email"));
-            pothole.setContactPhone(results.getString("contact_phone"));
+            Pothole pothole = mapRowToPothole(results);
             potholeList.add(pothole);
         }
-
         return potholeList;
     }
 
@@ -51,5 +41,47 @@ public class JdbcPotholeDao  implements PotholeDao{
 
     }
 
+    @Override
+    public void deletePothole(int potholeId) {
+        String sql = "DELETE FROM pothole WHERE pothole_id = ?";
+        jdbcTemplate.update(sql, potholeId);
+    }
 
+    @Override
+    public void updatePotholeStatus(Pothole pothole) {
+        String sql = "UPDATE pothole SET pending = ? WHERE pothole_id = ?";
+        jdbcTemplate.update(sql, pothole.isPending(), pothole.getPotholeId());
+    }
+
+    @Override
+    public List<Pothole> getPendingPotholes() {
+        List<Pothole> pendingPotholes = new ArrayList<>();
+        String sql = "SELECT pothole_id, date_reported, latitude, longitude, image_location, cross_street_1, cross_street_2, contact_name, contact_email, contact_phone, " +
+                "pending, severity " +
+                "FROM pothole " +
+                "WHERE pothole.pending = TRUE";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
+        while(results.next()) {
+            Pothole pothole = mapRowToPothole(results);
+            pendingPotholes.add(pothole);
+        }
+        return pendingPotholes;
+    }
+
+    private Pothole mapRowToPothole(SqlRowSet results) {
+        Pothole pothole = new Pothole();
+        pothole.setPotholeId(results.getInt("pothole_id"));
+        pothole.setDateReported(results.getDate("date_reported"));
+        pothole.setLatitude(results.getBigDecimal("latitude").setScale(6));
+        pothole.setLongitude(results.getBigDecimal("longitude").setScale(6));
+        pothole.setImageUrl(results.getString("image_location"));
+        pothole.setCrossStreet1(results.getString("cross_street_1"));
+        pothole.setCrossStreet2(results.getString("cross_street_2"));
+        pothole.setContactName(results.getString("contact_name"));
+        pothole.setContactEmail(results.getString("contact_email"));
+        pothole.setContactPhone(results.getString("contact_phone"));
+        pothole.setPending(results.getBoolean("pending"));
+        pothole.setSeverity(results.getInt("severity"));
+        return pothole;
+    }
 }

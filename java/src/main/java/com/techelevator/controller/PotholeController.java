@@ -27,5 +27,19 @@ public class PotholeController {
         potholeDao.addPothole(pothole);
     }
 
+    @RequestMapping(path = "/potholes/delete", method = RequestMethod.DELETE)
+    public void deletePothole(@RequestBody Pothole pothole) {
+        potholeDao.deletePothole(pothole.getPotholeId());
+    }
+
+    @RequestMapping(path = "potholes/status/update", method = RequestMethod.PUT)
+    public void updatePothole(@RequestBody Pothole pothole) {
+        potholeDao.updatePotholeStatus(pothole);
+    }
+
+    @RequestMapping(path = "/potholes/pending", method = RequestMethod.GET)
+    public List<Pothole> getPendingPotholes() {
+        return potholeDao.getPendingPotholes();
+    }
 
 }
