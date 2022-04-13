@@ -6,7 +6,9 @@ import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Component
@@ -131,6 +133,19 @@ public class JdbcPotholeDao  implements PotholeDao{
             pendingPotholes.add(pothole);
         }
         return pendingPotholes;
+    }
+
+    @Override
+    public void updatePotholeRepairStatus(Pothole pothole) {
+        String sql = "UPDATE pothole SET repair_status = ? WHERE pothole_id = ?";
+        jdbcTemplate.update(sql, pothole.getRepairStatus(), pothole.getPotholeId());
+    }
+
+    @Override
+    public void repairPothole(Pothole pothole) {
+        LocalDate today = LocalDate.now();
+        String sql = "UPDATE pothole SET repair_date = ?, repair_status = 'completed' WHERE pothole_id = ?";
+        jdbcTemplate.update(sql, today, pothole.getPotholeId());
     }
 
     private Pothole mapRowToPothole(SqlRowSet results) {

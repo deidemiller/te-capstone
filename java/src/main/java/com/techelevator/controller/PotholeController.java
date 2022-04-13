@@ -62,4 +62,15 @@ public class PotholeController {
         return potholeDao.getUnscheduledPotholes();
     }
 
+    @RequestMapping(path="/potholes/repair_status/update", method = RequestMethod.PUT)
+    public void updateRepairStatus(@RequestBody Pothole pothole) {
+        potholeDao.updatePotholeRepairStatus(pothole);
+    }
+
+    @RequestMapping(path="/potholes/complete", method = RequestMethod.PUT)
+    public void completePothole(@RequestBody Pothole pothole) {
+        potholeDao.repairPothole(pothole);
+    }
+
+
 }
