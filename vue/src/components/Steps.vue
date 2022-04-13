@@ -28,7 +28,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .step-container {
   display: grid;
   width: 60%;
