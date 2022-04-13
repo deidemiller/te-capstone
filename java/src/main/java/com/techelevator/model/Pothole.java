@@ -16,6 +16,24 @@ public class Pothole {
     private String contactPhone;
     private boolean isPending;
     private int severity;
+    private String repairStatus;
+    private Date repairDate;
+
+    public String getRepairStatus() {
+        return repairStatus;
+    }
+
+    public void setRepairStatus(String repairStatus) {
+        this.repairStatus = repairStatus;
+    }
+
+    public Date getRepairDate() {
+        return repairDate;
+    }
+
+    public void setRepairDate(Date repairDate) {
+        this.repairDate = repairDate;
+    }
 
     public boolean isPending() {
         return isPending;
