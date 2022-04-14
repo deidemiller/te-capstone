@@ -35,18 +35,18 @@
           </div>
         </div>
       </div>
-      <dashboard-main />
+        <router-view />
     </div>
   </div>
 </template>
 
 <script>
-import DashboardMain from "../components/DashboardMain.vue";
+
 
 export default {
   name: "dashboard",
   components: {
-    DashboardMain,
+
   },
 };
 </script>
