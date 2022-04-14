@@ -1,57 +1,128 @@
 <template>
-  <div id="dashboard">
-    <div class="side-menu">
-      <div class="brand-logo">
-        <img src="../assets/images/pothole_tracker_logo.png" alt="" />
-      </div>
-      <ul>
-        <li>
-          <font-awesome-icon icon="fa-solid fa-house" />
-          <span>Dashboard</span>
-        </li>
-        <li>
-          <font-awesome-icon icon="fa-solid fa-list-check" /><span>Review</span>
-        </li>
-      </ul>
-    </div>
-    <div class="container-dashboard">
-      <div class="header">
-        <div class="nav">
-          <div class="search">
-            <input type="text" placeholder="Search.." />
-            <button type="submit">🔍</button>
+  <div class="main">
+    <div class="content">
+      <div class="cards">
+        <div class="card">
+          <div class="box">
+            <h1>200</h1>
+            <h3>Ready for Review</h3>
           </div>
-          <div class="user">
-            <div class="welcome">
-              <h4>Welcome back, John!</h4>
-            </div>
-            <div class="notification">
-              <div><font-awesome-icon icon="fa-solid fa-bell" /></div>
-              <div><font-awesome-icon icon="fa-solid fa-comments" /></div>
-            </div>
-            <div class="user-pic">
-              <img src="../assets/images/user.jpg" alt="user-pic" />
-            </div>
+          <div class="icon-case">
+            <font-awesome-icon
+              icon="fa-solid fa-list-check"
+              size="3x"
+              :style="{ color: 'red' }"
+            />
+          </div>
+        </div>
+        <div class="card">
+          <div class="box">
+            <h1>150</h1>
+            <h3>Ready for Repair</h3>
+          </div>
+          <div class="icon-case">
+            <font-awesome-icon
+              icon="fa-solid fa-screwdriver-wrench"
+              size="3x"
+              :style="{ color: 'orange' }"
+            />
           </div>
         </div>
       </div>
-      <dashboard-main />
+      <div class="content-2">
+        <div class="recent">
+          <div class="title">
+            <h2>Recent Projects</h2>
+            <button class="button-64" role="button">
+              <span class="text">View All</span>
+            </button>
+          </div>
+
+          <table>
+            <tr>
+              <th>Date</th>
+              <th>Street</th>
+              <th>Verify</th>
+              <th>Delete</th>
+            </tr>
+
+            <tr>
+              <td>2022-4-12</td>
+              <td>This is street name</td>
+              <td>
+                <button class="button-35" role="button">Verify</button>
+              </td>
+              <td>
+                <button class="button-35" role="button">Delete</button>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div class="recent-2">
+          <div class="title">
+            <h2>Employees</h2>
+            <button class="button-64" role="button">
+              <span class="text">View All</span>
+            </button>
+          </div>
+          <table>
+            <tr>
+              <th>Profile</th>
+              <th>Name</th>
+              <th>Availability</th>
+            </tr>
+            <tr>
+              <td><img src="../assets/images/e1.jpg" alt="" /></td>
+              <td>John Doe</td>
+              <td>
+                <font-awesome-icon
+                  icon="fa-solid fa-calendar-check"
+                  size="2x"
+                  :style="{ color: 'green' }"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td><img src="../assets/images/e4.jpg" alt="" /></td>
+              <td>Jane Doe</td>
+              <td>
+                <font-awesome-icon
+                  icon="fa-solid fa-calendar-xmark"
+                  size="2x"
+                  :style="{ color: 'red' }"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td><img src="../assets/images/e3.jpg" alt="" /></td>
+              <td>John Doe</td>
+              <td>
+                <font-awesome-icon
+                  icon="fa-solid fa-calendar-check"
+                  size="2x"
+                  :style="{ color: 'green' }"
+                />
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
-<script>
-import DashboardMain from "../components/DashboardMain.vue";
-
+<script scoped>
 export default {
-  name: "dashboard",
-  components: {
-    DashboardMain,
-  },
+  name: "dashboard-main",
 };
 </script>
 
-<style scoped>
+<style>
+.main {
+  position: relative;
+  margin-top: 10vh;
+  min-height: 90vh;
+}
 #dashboard {
   height: 100vh;
 }
