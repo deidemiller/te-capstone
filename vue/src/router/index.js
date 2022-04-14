@@ -6,6 +6,8 @@ import Logout from "../views/Logout.vue";
 import Register from "../views/Register.vue";
 import store from "../store/index";
 import PotholeMap from "../views/PotholeMapView.vue";
+import DashMain from "../components/DashboardMain.vue";
+import DashReview from "../components/DashboardReview.vue";
 import DashBoard from "../views/DashBoardView.vue";
 
 Vue.use(Router);
@@ -67,6 +69,16 @@ const router = new Router({
       path: "/dashboard",
       name: "dashboard",
       component: DashBoard,
+      children: [
+        {
+          path: "",
+          component: DashMain,
+        },
+        {
+          path: "review",
+          component: DashReview,
+        },
+      ],
       meta: {
         requiresAuth: false,
       },

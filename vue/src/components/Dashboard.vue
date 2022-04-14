@@ -5,13 +5,15 @@
         <img src="../assets/images/pothole_tracker_logo.png" alt="" />
       </div>
       <ul>
-        <li>
+        <!-- <li>
           <font-awesome-icon icon="fa-solid fa-house" />
           <span>Dashboard</span>
         </li>
-        <li>
-          <font-awesome-icon icon="fa-solid fa-list-check" /><span>Review</span>
-        </li>
+        <li> -->
+        <router-link tag="li" to="/dashboard">DashBoard</router-link>
+        <!-- <font-awesome-icon icon="fa-solid fa-list-check" /><span>Review</span> -->
+        <!-- </li> -->
+        <router-link tag="li" to="/dashboard/review">Review</router-link>
       </ul>
     </div>
     <div class="container-dashboard">
@@ -35,19 +37,14 @@
           </div>
         </div>
       </div>
-      <dashboard-main />
+      <router-view />
     </div>
   </div>
 </template>
 
 <script>
-import DashboardMain from "../components/DashboardMain.vue";
-
 export default {
   name: "dashboard",
-  components: {
-    DashboardMain,
-  },
 };
 </script>
 
@@ -56,7 +53,7 @@ export default {
   height: 100vh;
 }
 img {
-  width: 60%;
+  width: 50%;
 }
 h2 {
   font-size: 1.5em;
@@ -246,67 +243,8 @@ ul {
   justify-content: space-around;
   align-items: center;
 }
-.container-dashboard .content {
-  position: relative;
-  margin-top: 10vh;
-  min-height: 90vh;
-}
-.container-dashboard .content .cards {
-  padding: 2em 1.5em;
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-  flex-wrap: wrap;
-}
-.container-dashboard .content .cards .card {
-  width: 30%;
-  height: 15em;
-  background-color: rgba(255, 255, 255, 0.739);
-  margin: 2em 1em;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.19);
-}
-.container-dashboard .content .content-2 {
-  min-height: 60vh;
-  display: flex;
-  justify-content: space-around;
-  align-items: flex-start;
-  flex-wrap: wrap;
-}
-.container-dashboard .content .content-2 .recent {
-  min-height: 50vh;
-  flex: 5;
-  background: rgba(255, 255, 255, 0.739);
-  margin: 0 2.5em 2.5em 2.5em;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.19);
-  display: flex;
-  flex-direction: column;
-  overflow-y: scroll;
-}
-.container-dashboard .content .content-2 .recent-2 {
-  flex: 2;
-  min-height: 50vh;
-  background: rgba(255, 255, 255, 0.739);
-  margin: 0 2.5em;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.19);
-  display: flex;
-  flex-direction: column;
-}
-
-table {
-  padding: 1.5em;
-}
-th,
-td {
-  text-align: center;
-  padding: 1em;
-}
-
-.container-dashboard .content .content-2 .recent-2 table td:nth-child(1) img {
-  height: 4em;
-  width: 4em;
-  border-radius: 50%;
+li.router-link-exact-active {
+  background-color: #888;
+  color: white;
 }
 </style>
