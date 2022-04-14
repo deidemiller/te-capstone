@@ -10,10 +10,16 @@
           <span>Dashboard</span>
         </li>
         <li> -->
-        <router-link tag="li" to="/dashboard">DashBoard</router-link>
+        <router-link tag="li" to="/dashboard"
+          ><font-awesome-icon icon="fa-solid fa-house" />DashBoard</router-link
+        >
         <!-- <font-awesome-icon icon="fa-solid fa-list-check" /><span>Review</span> -->
         <!-- </li> -->
-        <router-link tag="li" to="/dashboard/review">Review</router-link>
+        <router-link tag="li" to="/dashboard/review"
+          ><font-awesome-icon
+            icon="fa-solid fa-list-check"
+          />Review</router-link
+        >
       </ul>
     </div>
     <div class="container-dashboard">
@@ -167,11 +173,11 @@ ul {
   padding: 1em 4em;
   display: flex;
   align-items: center;
-
+  justify-content: space-between;
   font-weight: 700;
 }
 .side-menu li:hover {
-  background-color: #888;
+  background-color: #22577e;
   color: white;
 }
 .side-menu li span {
@@ -244,7 +250,7 @@ ul {
   align-items: center;
 }
 li.router-link-exact-active {
-  background-color: #888;
+  background-color: #22577e;
   color: white;
 }
 </style>

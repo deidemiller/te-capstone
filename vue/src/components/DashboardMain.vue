@@ -250,7 +250,7 @@ h3 {
   
 }
 .content .content-2 .recent {
-  min-height: 50vh;
+  height: 50vh;
   flex: 5;
   background: rgba(255, 255, 255, 0.739);
   margin: 0 2.5em 2.5rem 2.5em;
@@ -261,7 +261,7 @@ h3 {
 }
 .content .content-2 .recent-2 {
   flex: 2;
-  min-height: 50vh;
+  height: 50vh;
   background: rgba(255, 255, 255, 0.739);
   margin: 0 2.5em;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.19);
