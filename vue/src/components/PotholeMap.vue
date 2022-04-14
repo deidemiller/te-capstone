@@ -148,7 +148,10 @@ export default {
 
       lat: "",
       lng: "",
-      newPothole: {},
+      newPothole: {
+        pending: true,
+        repairStatus: 'unscheduled'
+      },
     };
   },
   methods: {
@@ -182,7 +185,10 @@ export default {
           alert(
             "This has been successfully added! Thank you for helping make our roads safer!"
           );
-          this.newPothole = {};
+          this.newPothole = {
+            pending: true,
+            repairStatus: 'unscheduled'
+          };
         }
       });
       this.showForm = false;
