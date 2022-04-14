@@ -15,9 +15,18 @@ public class Pothole {
     private String contactEmail;
     private String contactPhone;
     private boolean isPending;
-    private int severity;
+    private String severity;
     private String repairStatus;
     private Date repairDate;
+    private boolean isInspected;
+
+    public boolean isInspected() {
+        return isInspected;
+    }
+
+    public void setInspected(boolean inspected) {
+        isInspected = inspected;
+    }
 
     public String getRepairStatus() {
         return repairStatus;
@@ -43,11 +52,11 @@ public class Pothole {
         isPending = pending;
     }
 
-    public int getSeverity() {
+    public String getSeverity() {
         return severity;
     }
 
-    public void setSeverity(int severity) {
+    public void setSeverity(String severity) {
         this.severity = severity;
     }
 
