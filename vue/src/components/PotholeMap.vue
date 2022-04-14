@@ -37,7 +37,7 @@
             <div class="severity">
               <h1>Choose Severity:</h1>
               <label for="severity">Choose Severity:</label>
-              <select name="severity" id="severity">
+              <select name="severity" id="severity" v-model="newPothole.severity">
                 <option value="low">Low</option>
                 <option value="moderate">Moderate</option>
                 <option value="high">High</option>
@@ -176,6 +176,9 @@ export default {
       this.newPothole.latitude = e.latlng.lat;
       this.newPothole.longitude = e.latlng.lng;
       this.newPothole.dateReported = reportedDate;
+      this.newPothole.pending = true;
+      this.newPothole.repairStatus = 'unscheduled';
+      this.newPothole.inspected = 'false';
     },
     submitForm() {
       PotholeService.add(this.newPothole).then((response) => {

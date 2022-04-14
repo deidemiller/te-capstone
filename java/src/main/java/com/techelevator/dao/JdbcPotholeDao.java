@@ -24,7 +24,7 @@ public class JdbcPotholeDao  implements PotholeDao{
         List<Pothole> potholeList = new ArrayList<>();
 
         String sql = "SELECT pothole_id, date_reported, latitude, longitude, image_location, cross_street_1, cross_street_2, contact_name, contact_email, contact_phone, " +
-                "pending, severity, repair_status, repair_date " +
+                "pending, severity, repair_status, repair_date, inspected " +
                 "FROM pothole " +
                 "WHERE repair_status != 'completed'";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
@@ -38,8 +38,8 @@ public class JdbcPotholeDao  implements PotholeDao{
 
     @Override
     public void addPothole(Pothole pothole) {
-        String sql = "INSERT INTO pothole (date_reported, latitude, longitude, image_location, cross_street_1, cross_street_2, contact_name, contact_email, contact_phone, inspected, pending, severity, repairStatus) " +
-                "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, false, true, ?, 'unscheduled)";
+        String sql = "INSERT INTO pothole (date_reported, latitude, longitude, image_location, cross_street_1, cross_street_2, contact_name, contact_email, contact_phone, inspected, pending, severity, repair_status) " +
+                "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, false, true, ?, 'unscheduled')";
         jdbcTemplate.update(sql, pothole.getDateReported(), pothole.getLatitude(), pothole.getLongitude(), pothole.getImageUrl(), pothole.getCrossStreet1(), pothole.getCrossStreet2(),pothole.getContactName(), pothole.getContactEmail(), pothole.getContactPhone(), pothole.getSeverity());
 
     }
