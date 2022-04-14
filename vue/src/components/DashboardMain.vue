@@ -47,9 +47,9 @@
                 <th>Delete</th>
               </tr>
 
-              <tr>
-                <td>2022-4-12</td>
-                <td>This is street name</td>
+              <tr v-for="pothole in pendingPotholes" v-bind:key="pothole.potholeId">
+                <td> {{pothole.dateReported}} </td>
+                <td> Street: {{pothole.crossStreet1}}, Nearest Intersection {{pothole.crossStreet2}} </td>
                 <td>
                   <button class="button-35" role="button">Verify</button>
                 </td>
@@ -114,8 +114,25 @@
 </template>
 
 <script scoped>
+import PotholeService from "../services/PotholeService";
+
 export default {
   name: "dashboard-main",
+  data() {
+    return {
+      pendingPotholes: []
+    };
+  },
+  methods: {
+    getPendingPotholes() {
+      PotholeService.listPending().then( response => {
+        this.pendingPotholes=response.data;
+      });
+    },
+  },
+  created() {
+    this.getPendingPotholes;
+  },
 };
 </script>
 
@@ -124,7 +141,6 @@ export default {
   position: relative;
   margin-top: 10vh;
   min-height: 90vh;
-  
 }
 
 h2 {
@@ -247,7 +263,6 @@ h3 {
   justify-content: space-around;
   align-items: flex-start;
   flex-wrap: wrap;
-  
 }
 .content .content-2 .recent {
   height: 50vh;
