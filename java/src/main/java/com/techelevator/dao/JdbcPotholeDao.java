@@ -52,8 +52,8 @@ public class JdbcPotholeDao  implements PotholeDao{
 
     @Override
     public void updatePotholeStatus(Pothole pothole) {
-        String sql = "UPDATE pothole SET pending = ? WHERE pothole_id = ?";
-        jdbcTemplate.update(sql, pothole.isPending(), pothole.getPotholeId());
+        String sql = "UPDATE pothole SET pending = false WHERE pothole_id = ?";
+        jdbcTemplate.update(sql,  pothole.getPotholeId());
     }
 
     @Override
