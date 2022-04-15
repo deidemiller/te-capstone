@@ -41,9 +41,9 @@
 
             <tbody>
               <tr v-for="pothole in potholes" v-bind:key="pothole.potholeId">
-                <td>{{pothole.dateReported}}</td>
-                <td>{{pothole.crossStreet1}} & {{pothole.crossStreet2}}</td>
-                <td>{{pothole.repairStatus}}</td>
+                <td>{{ pothole.dateReported }}</td>
+                <td>{{ pothole.crossStreet1 }} & {{ pothole.crossStreet2 }}</td>
+                <td>{{ pothole.repairStatus }}</td>
                 <td>
                   <button class="button-35" role="button" v-on:click="show">
                     View
@@ -51,7 +51,7 @@
                 </td>
                 
               </tr>
-              <tr class="details" v-if="showDetails">
+              <tr class="details" v-if="showDetails" >
                 <td colspan="4">
                   <div class="info">
                     <div class="text">
@@ -85,6 +85,7 @@
                   </div>
                 </td>
               </tr>
+
             </tbody>
           </table>
         </div>
@@ -143,8 +144,9 @@ export default {
         latitude: "",
         longitude: "",
         imageUrl: "",
+        showDetails: false,
       },
-      potholes: {},
+      potholes: [],
       showDetails: false,
       lat: "",
       lng: "",
@@ -157,6 +159,9 @@ export default {
     getPotholes() {
       PotholeService.getVerifiedPotholes().then((response) => {
         this.potholes = response.data;
+        this.potholes.forEach(pothole => {
+          pothole.showDetails = false;
+        });
       });
     },
     show() {
@@ -203,11 +208,19 @@ export default {
         });
       } else {
         this.completed = false;
-        PotholeService.getVerifiedPotholes().then(response => {
+        PotholeService.getVerifiedPotholes().then((response) => {
           this.potholes = response.data;
         });
       }
     },
+    showPotholeDetails(id) { 
+      for (let i = 0; i < this.potholes.length; i++) {
+        if (this.potholes[i].potholeId === id) {
+          this.potholes[i].showDetails = !this.potholes[i].showDetails;
+          console.log(this.potholes[i].showDetails)
+        }
+      }
+    }
   },
   created() {
     this.getPotholes();
