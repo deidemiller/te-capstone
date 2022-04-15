@@ -26,7 +26,7 @@ export default {
     return http.get('/potholes/unscheduled');
   },
   delete(pothole) {
-    http.delete('potholes/delete', pothole);
+    return http.put('/potholes/delete', pothole);
   },
   updatePending(pothole) {
     http.put('/potholes/status/update', pothole);
