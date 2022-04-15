@@ -144,10 +144,11 @@ export default {
   padding: 0 1em;
 }
 h4 {
-  font-size: 1.2em;
+  font-size: 1em;
+  color: #666;
 }
 input[type="checkbox"] {
-  width: 3em;
+  width: 2.75em;
   height: 1.5em;
   appearance: none;
   outline: none;

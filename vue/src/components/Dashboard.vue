@@ -166,14 +166,15 @@ h3 {
   justify-content: center;
 }
 ul {
-  padding: 0;
+  padding: 1em;
 }
 .side-menu li {
-  font-size: 1.5em;
-  padding: 1em 4em;
+  font-size: 1.2em;
+  padding: 2em 4em;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
   font-weight: 700;
 }
 .side-menu li:hover {

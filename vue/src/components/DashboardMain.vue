@@ -29,6 +29,19 @@
               />
             </div>
           </div>
+          <div class="card">
+            <div class="box">
+              <h1>150</h1>
+              <h3>Completed</h3>
+            </div>
+            <div class="icon-case">
+              <font-awesome-icon
+                icon="fa-solid fa-thumbs-up"
+                size="3x"
+                :style="{ color: '#6BCB77' }"
+              />
+            </div>
+          </div>
         </div>
         <div class="content-2">
           <div class="recent">

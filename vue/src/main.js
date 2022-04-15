@@ -12,6 +12,7 @@ import { faListCheck } from "@fortawesome/free-solid-svg-icons";
 import { faCalendarCheck } from "@fortawesome/free-solid-svg-icons";
 import { faCalendarXmark } from "@fortawesome/free-solid-svg-icons";
 import { faScrewdriverWrench } from "@fortawesome/free-solid-svg-icons";
+import { faThumbsUp } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
 library.add(faHouse);
@@ -21,6 +22,7 @@ library.add(faListCheck);
 library.add(faCalendarCheck);
 library.add(faCalendarXmark);
 library.add(faScrewdriverWrench);
+library.add(faThumbsUp);
 Vue.component("font-awesome-icon", FontAwesomeIcon);
 Vue.config.productionTip = false;
 
