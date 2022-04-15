@@ -16,4 +16,7 @@ public interface PotholeDao {
     List<Pothole> getUnscheduledPotholes();
     void updatePotholeRepairStatus(Pothole pothole);
     void repairPothole(Pothole pothole);
+    Integer countRepaired();
+    Integer countUnscheduled();
+    Integer countScheduled();
 }

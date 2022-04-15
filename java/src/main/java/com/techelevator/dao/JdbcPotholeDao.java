@@ -150,6 +150,39 @@ public class JdbcPotholeDao  implements PotholeDao{
         jdbcTemplate.update(sql, today, pothole.getPotholeId());
     }
 
+    @Override
+    public Integer countRepaired() {
+        int repaired = 0;
+        String sql = "SELECT count(*) FROM pothole WHERE repair_status = 'completed'";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
+        if (results.next()) {
+            repaired = results.getInt("count");
+        }
+        return repaired;
+    }
+
+    @Override
+    public Integer countUnscheduled() {
+        int unscheduled = 0;
+        String sql = "SELECT count(*) FROM pothole WHERE repair_status = 'unscheduled' AND pending = 'false'";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
+        if (results.next()) {
+            unscheduled = results.getInt("count");
+        }
+        return unscheduled;
+    }
+
+    @Override
+    public Integer countScheduled() {
+        int scheduled = 0;
+        String sql = "SELECT count(*) FROM pothole WHERE repair_status = 'scheduled'";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
+        if (results.next()) {
+            scheduled = results.getInt("count");
+        }
+        return scheduled;
+    }
+
     private Pothole mapRowToPothole(SqlRowSet results) {
         Pothole pothole = new Pothole();
         pothole.setPotholeId(results.getInt("pothole_id"));

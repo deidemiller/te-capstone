@@ -72,5 +72,19 @@ public class PotholeController {
         potholeDao.repairPothole(pothole);
     }
 
+    @RequestMapping(path = "/potholes/count/completed", method = RequestMethod.GET)
+    public Integer countRepaired() {
+        return potholeDao.countRepaired();
+    }
+
+    @RequestMapping(path = "/potholes/count/scheduled", method = RequestMethod.GET)
+    public Integer countScheduled() {
+        return potholeDao.countScheduled();
+    }
+
+    @RequestMapping(path = "potholes/count/unscheduled", method = RequestMethod.GET)
+    public Integer countUnscheduled() {
+        return potholeDao.countUnscheduled();
+    }
 
 }
