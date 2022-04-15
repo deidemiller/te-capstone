@@ -18,63 +18,60 @@
       <section>
         <div class="list">
           <table>
-            <thead>
-              <tr>
-                <th>Date</th>
-                <th>Street</th>
-                <th>Status</th>
-                <th>View</th>
-              </tr>
-            </thead>
+            <tr>
+              <th>Date</th>
+              <th>Street</th>
+              <th>Status</th>
+              <th>View</th>
+            </tr>
 
-            <tbody>
-              <tr>
-                <td>2022-4-12</td>
-                <td>This is street name</td>
-                <td>
-                  Pending
-                </td>
-                <td>
-                  <button class="button-35" role="button" v-on:click="show">
-                    View
-                  </button>
-                </td>
-              </tr>
-              <tr class="details" v-if="showDetails">
-                <td colspan="4">
-                  <div class="info">
-                    <div class="text">
-                      <div class="pothole-detail">
-                        <h3>Pothole Details</h3>
-                        <h4>Date: 2022-04-15</h4>
-                        <h4>Street: This is street name</h4>
-                        <h4>Severity: High</h4>
-                      </div>
-                      <div class="contact">
-                        <h3>Contact Info</h3>
-                        <h4>Name: Jane Doe</h4>
-                        <h4>Email: janedoe@gmail.com</h4>
-                        <h4>Phone: 444-4444-4444</h4>
-                      </div>
+            <!-- <tr v-for="pothole in potholes" v-bind:key="pothole.potholeId">
+              <td>{{ pothole.dateReported }}</td>
+              <td>{{ pothole.crossStreet1 }} {{ pothole.crossStreet2 }}</td>
+              <td>
+                {{ pothole.repairStatus }}
+              </td>
+              <td>
+                <button class="button-35" role="button" v-on:click="show">
+                  View
+                </button>
+              </td>
+            </tr> -->
+
+            <tr class="details" v-if="showDetails">
+              <td colspan="4">
+                <div class="info">
+                  <div class="text">
+                    <div class="pothole-detail">
+                      <h3>Pothole Details</h3>
+                      <h4>Date: 2022-04-15</h4>
+                      <h4>Street: This is street name</h4>
+                      <h4>Severity: High</h4>
                     </div>
-                    <div class="pothole-img">
-                      <img
-                        src="https://i.postimg.cc/Jn0hvp6f/matt-hoffman-OOi-Ay2l-BZc-unsplash.jpg"
-                        alt=""
-                      />
-                    </div>
-                    <div class="option">
-                      <button class="button-80" role="button" v-on:click="show">
-                        Sechedual
-                      </button>
-                      <button class="button-80" role="button" v-on:click="show">
-                        Repair
-                      </button>
+                    <div class="contact">
+                      <h3>Contact Info</h3>
+                      <h4>Name: Jane Doe</h4>
+                      <h4>Email: janedoe@gmail.com</h4>
+                      <h4>Phone: 444-4444-4444</h4>
                     </div>
                   </div>
-                </td>
-              </tr>
-            </tbody>
+                  <div class="pothole-img">
+                    <img
+                      src="https://i.postimg.cc/Jn0hvp6f/matt-hoffman-OOi-Ay2l-BZc-unsplash.jpg"
+                      alt=""
+                    />
+                  </div>
+                  <div class="option">
+                    <button class="button-80" role="button" v-on:click="show">
+                      Sechedual
+                    </button>
+                    <button class="button-80" role="button" v-on:click="show">
+                      Repair
+                    </button>
+                  </div>
+                </div>
+              </td>
+            </tr>
           </table>
         </div>
         <div id="map">
@@ -126,13 +123,7 @@ export default {
         '&copy; <a target="_blank" href="http://osm.org/copyright">OpenStreetMap</a> contributors',
       zoom: 13,
       center: [39.961178, -82.998795],
-      pothole: {
-        potholeId: "",
-        dateReported: "",
-        latitude: "",
-        longitude: "",
-        imageUrl: "",
-      },
+      pothole: {},
       potholes: {},
       showDetails: false,
       lat: "",
@@ -218,12 +209,14 @@ input:checked[type="checkbox"]:before {
 }
 .list {
   width: 70%;
+  height: 850px;
   display: flex;
   flex-direction: column;
   text-align: center;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.19);
   overflow-y: scroll;
 }
+
 table {
   padding: 1.5em;
 }
@@ -232,9 +225,11 @@ td {
   padding: 1em;
   border-bottom: 1px solid #888;
 }
+
 section {
   width: 100%;
   display: flex;
+  flex-direction: row;
 }
 #map {
   width: 30%;
