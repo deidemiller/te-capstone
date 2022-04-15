@@ -5,7 +5,7 @@
         <div class="cards">
           <div class="card">
             <div class="box">
-              <h1>{{pendingPotholes.length}}</h1>
+              <h1>{{ pendingPotholes.length }}</h1>
               <h3>Ready for Review</h3>
             </div>
             <div class="icon-case">
@@ -51,44 +51,45 @@
                 <span class="text">View All</span>
               </button>
             </div>
+            <div class="table1">
+              <table>
+                <tr>
+                  <th>Date</th>
+                  <th>Street</th>
+                  <th>Verify</th>
+                  <th>Delete</th>
+                </tr>
 
-            <table>
-              <tr>
-                <th>Date</th>
-                <th>Street</th>
-                <th>Verify</th>
-                <th>Delete</th>
-              </tr>
-
-              <tr
-                v-for="pothole in pendingPotholes"
-                v-bind:key="pothole.potholeId"
-              >
-                <td>{{ pothole.dateReported }}</td>
-                <td>
-                  Street: {{ pothole.crossStreet1 }}, Nearest Intersection
-                  {{ pothole.crossStreet2 }}
-                </td>
-                <td>
-                  <button
-                    class="button-35"
-                    role="button"
-                    v-on:click="verifyPothole(pothole.potholeId)"
-                  >
-                    Verify
-                  </button>
-                </td>
-                <td>
-                  <button
-                    class="button-35"
-                    role="button"
-                    v-on:click="deletePothole(pothole.potholeId)"
-                  >
-                    Delete
-                  </button>
-                </td>
-              </tr>
-            </table>
+                <tr
+                  v-for="pothole in pendingPotholes"
+                  v-bind:key="pothole.potholeId"
+                >
+                  <td>{{ pothole.dateReported }}</td>
+                  <td>
+                    Street: {{ pothole.crossStreet1 }}, Nearest Intersection
+                    {{ pothole.crossStreet2 }}
+                  </td>
+                  <td>
+                    <button
+                      class="button-35"
+                      role="button"
+                      v-on:click="verifyPothole(pothole.potholeId)"
+                    >
+                      Verify
+                    </button>
+                  </td>
+                  <td>
+                    <button
+                      class="button-35"
+                      role="button"
+                      v-on:click="deletePothole(pothole.potholeId)"
+                    >
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              </table>
+            </div>
           </div>
           <div class="recent-2">
             <div class="title">
@@ -97,46 +98,48 @@
                 <span class="text">View All</span>
               </button>
             </div>
-            <table>
-              <tr>
-                <th>Profile</th>
-                <th>Name</th>
-                <th>Availability</th>
-              </tr>
-              <tr>
-                <td><img src="../assets/images/e1.jpg" alt="" /></td>
-                <td>John Doe</td>
-                <td>
-                  <font-awesome-icon
-                    icon="fa-solid fa-calendar-check"
-                    size="2x"
-                    :style="{ color: 'green' }"
-                  />
-                </td>
-              </tr>
-              <tr>
-                <td><img src="../assets/images/e4.jpg" alt="" /></td>
-                <td>Jane Doe</td>
-                <td>
-                  <font-awesome-icon
-                    icon="fa-solid fa-calendar-xmark"
-                    size="2x"
-                    :style="{ color: 'red' }"
-                  />
-                </td>
-              </tr>
-              <tr>
-                <td><img src="../assets/images/e3.jpg" alt="" /></td>
-                <td>John Doe</td>
-                <td>
-                  <font-awesome-icon
-                    icon="fa-solid fa-calendar-check"
-                    size="2x"
-                    :style="{ color: 'green' }"
-                  />
-                </td>
-              </tr>
-            </table>
+            <div class="table">
+              <table>
+                <tr>
+                  <th>Profile</th>
+                  <th>Name</th>
+                  <th>Availability</th>
+                </tr>
+                <tr>
+                  <td><img src="../assets/images/e1.jpg" alt="" /></td>
+                  <td>John Doe</td>
+                  <td>
+                    <font-awesome-icon
+                      icon="fa-solid fa-calendar-check"
+                      size="2x"
+                      :style="{ color: 'green' }"
+                    />
+                  </td>
+                </tr>
+                <tr>
+                  <td><img src="../assets/images/e4.jpg" alt="" /></td>
+                  <td>Jane Doe</td>
+                  <td>
+                    <font-awesome-icon
+                      icon="fa-solid fa-calendar-xmark"
+                      size="2x"
+                      :style="{ color: 'red' }"
+                    />
+                  </td>
+                </tr>
+                <tr>
+                  <td><img src="../assets/images/e3.jpg" alt="" /></td>
+                  <td>John Doe</td>
+                  <td>
+                    <font-awesome-icon
+                      icon="fa-solid fa-calendar-check"
+                      size="2x"
+                      :style="{ color: 'green' }"
+                    />
+                  </td>
+                </tr>
+              </table>
+            </div>
           </div>
         </div>
       </div>
@@ -327,7 +330,12 @@ h3 {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.19);
   display: flex;
   flex-direction: column;
+}
+.table1 {
+  display: flex;
+  flex-direction: column;
   overflow-y: scroll;
+  height: 80%;
 }
 .content .content-2 .recent-2 {
   flex: 2;
@@ -352,5 +360,8 @@ td {
   height: 4em;
   width: 4em;
   border-radius: 50%;
+}
+.table {
+  overflow-y: scroll;
 }
 </style>
