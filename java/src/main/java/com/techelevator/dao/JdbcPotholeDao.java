@@ -28,7 +28,7 @@ public class JdbcPotholeDao  implements PotholeDao{
         String sql = "SELECT pothole_id, date_reported, latitude, longitude, image_location, cross_street_1, cross_street_2, contact_name, contact_email, contact_phone, " +
                 "pending, severity, repair_status, repair_date, inspected " +
                 "FROM pothole " +
-                "WHERE pending = false AND repair_status != true;";
+                "WHERE pending = false AND repair_status != 'completed';";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
 
         while(results.next()) {
