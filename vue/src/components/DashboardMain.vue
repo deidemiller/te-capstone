@@ -47,14 +47,26 @@
                 <th>Delete</th>
               </tr>
 
-              <tr v-for="pothole in pendingPotholes" v-bind:key="pothole.potholeId">
-                <td> {{pothole.dateReported}} </td>
-                <td> Street: {{pothole.crossStreet1}}, Nearest Intersection {{pothole.crossStreet2}} </td>
+              <tr
+                v-for="pothole in pendingPotholes"
+                v-bind:key="pothole.potholeId"
+              >
+                <td>{{ pothole.dateReported }}</td>
                 <td>
-                  <button class="button-35" role="button">Verify</button>
+                  Street: {{ pothole.crossStreet1 }}, Nearest Intersection
+                  {{ pothole.crossStreet2 }}
                 </td>
                 <td>
-                  <button class="button-35" role="button">Delete</button>
+                  <button class="button-35" role="button" v-on:click="verifyPothole(pothole.potholeId) ">Verify</button>
+                </td>
+                <td>
+                  <button
+                    class="button-35"
+                    role="button"
+                    v-on:click="deletePothole(pothole.potholeId)"
+                  >
+                    Delete
+                  </button>
                 </td>
               </tr>
             </table>
@@ -120,18 +132,46 @@ export default {
   name: "dashboard-main",
   data() {
     return {
-      pendingPotholes: []
+      pothole: {},
+      pendingPotholes: [],
     };
   },
   methods: {
     getPendingPotholes() {
-      PotholeService.listPending().then( response => {
-        this.pendingPotholes=response.data;
+      PotholeService.listPending().then((response) => {
+        this.pendingPotholes = response.data;
       });
     },
+    deletePothole(id) {
+      PotholeService.delete(id).then((response) => {
+        if (response.status === 200) {
+          this.getPendingPotholes();
+        }
+      });
+    },
+    verifyPothole(id) {
+      for (let i=0; i<this.pendingPotholes.length; i++){
+        if (id===this.pendingPotholes[i]){
+          this.pothole=this.pendingPotholes[i];
+          break;
+        }
+      }
+      this.pothole.repairStatus="unscheduled";
+      PotholeService.updateRepairStatus(this.pothole).then(response => {
+        if (response.status===200){
+          PotholeService.updatePending(this.pothole).then(response => {
+            if (response.status===200){
+              console.log("cool")
+            }
+          });
+          this.pothole={};
+          this.getPendingPotholes();
+        }
+      });
+    }
   },
   created() {
-    this.getPendingPotholes;
+    this.getPendingPotholes();
   },
 };
 </script>
