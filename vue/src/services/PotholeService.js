@@ -26,16 +26,16 @@ export default {
     return http.get('/potholes/unscheduled');
   },
   delete(id) {
-    return http.put('/potholes/delete/'+id);
+    return http.delete('/potholes/delete/'+id);
   },
   updatePending(pothole) {
-    http.put('/potholes/status/update', pothole);
+    return http.put('/potholes/status/update', pothole);
   },
   updateRepairStatus(pothole) {
-    http.put('/potholes/repair_status/update', pothole);
+    return http.put('/potholes/repair_status/update', pothole);
   },
   repairedPothole(pothole) {
-    http.put('/potholes/complete', pothole)
+    return http.put('/potholes/complete', pothole)
   }
 
 };

@@ -57,7 +57,7 @@
                   {{ pothole.crossStreet2 }}
                 </td>
                 <td>
-                  <button class="button-35" role="button">Verify</button>
+                  <button class="button-35" role="button" v-on:click="verifyPothole(pothole.potholeId) ">Verify</button>
                 </td>
                 <td>
                   <button
@@ -149,6 +149,26 @@ export default {
         }
       });
     },
+    verifyPothole(id) {
+      for (let i=0; i<this.pendingPotholes.length; i++){
+        if (id===this.pendingPotholes[i]){
+          this.pothole=this.pendingPotholes[i];
+          break;
+        }
+      }
+      this.pothole.repairStatus="unscheduled";
+      PotholeService.updateRepairStatus(this.pothole).then(response => {
+        if (response.status===200){
+          PotholeService.updatePending(this.pothole).then(response => {
+            if (response.status===200){
+              console.log("cool")
+            }
+          });
+          this.pothole={};
+          this.getPendingPotholes();
+        }
+      });
+    }
   },
   created() {
     this.getPendingPotholes();
