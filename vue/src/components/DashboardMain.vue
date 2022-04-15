@@ -18,8 +18,10 @@
           </div>
           <div class="card">
             <div class="box">
-              <h1>150</h1>
-              <h3>Ready for Repair</h3>
+              <h1>{{unScheduled}}</h1>
+              <h3>Unscheduled</h3>
+              <h1>{{scheduled}}</h1>
+              <h3>Scheduled</h3>
             </div>
             <div class="icon-case">
               <font-awesome-icon
@@ -31,7 +33,7 @@
           </div>
           <div class="card">
             <div class="box">
-              <h1>150</h1>
+              <h1>{{completed}}</h1>
               <h3>Completed</h3>
             </div>
             <div class="icon-case">
@@ -156,6 +158,9 @@ export default {
     return {
       pothole: {},
       pendingPotholes: [],
+      completed: 0,
+      scheduled: 0,
+      unScheduled: 0
     };
   },
   methods: {
@@ -183,13 +188,32 @@ export default {
           this.pothole = {};
           console.log("cool");
         }
+        
       });
-
       this.getPendingPotholes();
+      this.unScheduledPotholes();
+    },
+    completedPotholes() {
+      PotholeService.countRepaired().then(response => {
+        this.completed = response.data;
+      });
+    },
+    scheduledPotholes() {
+      PotholeService.countScheduled().then(response => {
+        this.scheduled = response.data;
+      });
+    },
+    unScheduledPotholes() {
+      PotholeService.countUnscheduled().then(response => {
+        this.unScheduled = response.data;
+      });
     },
   },
   created() {
     this.getPendingPotholes();
+    this.completedPotholes();
+    this.scheduledPotholes();
+    this.unScheduledPotholes();
   },
 };
 </script>

@@ -35,7 +35,15 @@ export default {
     return http.put('/potholes/repair_status/update', pothole);
   },
   repairedPothole(pothole) {
-    return http.put('/potholes/complete', pothole)
-  }
-
+    return http.put('/potholes/complete', pothole);
+  },
+  countRepaired() {
+    return http.get('/potholes/count/completed');
+  },
+  countScheduled() {
+    return http.get('potholes/count/scheduled');
+  },
+  countUnscheduled() {
+    return http.get('/potholes/count/unscheduled');
+  },
 };
