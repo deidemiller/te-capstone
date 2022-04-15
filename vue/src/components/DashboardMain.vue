@@ -18,10 +18,10 @@
           </div>
           <div class="card">
             <div class="box">
-              <h1>{{unScheduled}}</h1>
-              <h3>Unscheduled</h3>
               <h1>{{scheduled}}</h1>
               <h3>Scheduled</h3>
+              <h1>{{unScheduled}}</h1>
+              <h3>Need to be Scheduled</h3>
             </div>
             <div class="icon-case">
               <font-awesome-icon
