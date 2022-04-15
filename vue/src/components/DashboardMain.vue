@@ -143,13 +143,7 @@ export default {
       });
     },
     deletePothole(id) {
-      for(let i =0; i<this.pendingPotholes.length; i++){
-       if (this.pendingPotholes[i]===id){
-         this.pothole=this.pendingPotholes[i];
-         break;
-       } 
-      }
-      PotholeService.delete(this.pothole).then((response) => {
+      PotholeService.delete(id).then((response) => {
         if (response.status === 200) {
           this.getPendingPotholes();
         }

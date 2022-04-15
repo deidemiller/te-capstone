@@ -25,8 +25,8 @@ export default {
   listUnscheduled() {
     return http.get('/potholes/unscheduled');
   },
-  delete(pothole) {
-    return http.put('/potholes/delete', pothole);
+  delete(id) {
+    return http.put('/potholes/delete/'+id);
   },
   updatePending(pothole) {
     http.put('/potholes/status/update', pothole);
