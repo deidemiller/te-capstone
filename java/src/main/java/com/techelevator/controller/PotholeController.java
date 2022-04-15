@@ -28,7 +28,7 @@ public class PotholeController {
     }
 
     @RequestMapping(path = "/potholes/delete/{id}", method = RequestMethod.DELETE)
-    public void deletePothole(Integer id) {
+    public void deletePothole(@PathVariable Integer id) {
         potholeDao.deletePothole(id);
     }
 
