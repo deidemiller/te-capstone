@@ -41,9 +41,12 @@ export default {
     return http.get('/potholes/count/completed');
   },
   countScheduled() {
-    return http.get('potholes/count/scheduled');
+    return http.get('/potholes/count/scheduled');
   },
   countUnscheduled() {
     return http.get('/potholes/count/unscheduled');
   },
+  getVerifiedPotholes() {
+    return http.get('/potholes/verified');
+  }
 };

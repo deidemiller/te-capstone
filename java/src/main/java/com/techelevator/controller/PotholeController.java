@@ -82,9 +82,14 @@ public class PotholeController {
         return potholeDao.countScheduled();
     }
 
-    @RequestMapping(path = "potholes/count/unscheduled", method = RequestMethod.GET)
+    @RequestMapping(path = "/potholes/count/unscheduled", method = RequestMethod.GET)
     public Integer countUnscheduled() {
         return potholeDao.countUnscheduled();
+    }
+
+    @RequestMapping(path = "/potholes/verified", method = RequestMethod.GET)
+    public List<Pothole> getVerifiedPotholes() {
+        return potholeDao.getAllVerifiedPotholes();
     }
 
 }
