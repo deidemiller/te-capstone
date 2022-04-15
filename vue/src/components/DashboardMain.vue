@@ -5,7 +5,7 @@
         <div class="cards">
           <div class="card">
             <div class="box">
-              <h1>200</h1>
+              <h1>{{pendingPotholes.length}}</h1>
               <h3>Ready for Review</h3>
             </div>
             <div class="icon-case">
@@ -157,24 +157,19 @@ export default {
     },
     verifyPothole(id) {
       for (let i = 0; i < this.pendingPotholes.length; i++) {
-        if (id === this.pendingPotholes[i]) {
+        if (id === this.pendingPotholes[i].potholeId) {
           this.pothole = this.pendingPotholes[i];
           break;
         }
       }
-      this.pothole.repairStatus = "unscheduled";
-      PotholeService.updateRepairStatus(this.pothole).then((response) => {
+      PotholeService.updatePending(this.pothole).then((response) => {
         if (response.status === 200) {
-          PotholeService.updatePending(this.pothole).then((response) => {
-            if (response.status === 200) {
-              this.pothole = {};
-              console.log("cool");
-            }
-          });
-
-          this.getPendingPotholes();
+          this.pothole = {};
+          console.log("cool");
         }
       });
+
+      this.getPendingPotholes();
     },
   },
   created() {
