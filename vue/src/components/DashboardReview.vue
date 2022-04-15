@@ -3,56 +3,139 @@
     <div class="review">
       <div class="filter">
         <div class="status-button">
-          <h4>Repair</h4>
-          <input type="checkbox" />
+          <h4>Unscheduled</h4>
+          <input
+            type="checkbox"
+            v-model="unscheduled"
+            v-on:click="getUnscheduledPotholes()"
+          />
         </div>
         <div class="status-button">
-          <h4>Sechedual</h4>
-          <input type="checkbox" />
+          <h4>Scheduled</h4>
+          <input
+            type="checkbox"
+            v-model="scheduled"
+            v-on:click="getScheduledPotholes()"
+          />
         </div>
         <div class="status-button">
-          <h4>Complete</h4>
-          <input type="checkbox" />
+          <h4>Completed</h4>
+          <input
+            type="checkbox"
+            v-model="completed"
+            v-on:click="getCompletedPotholes()"
+          />
         </div>
       </div>
       <section>
         <div class="list">
-          <table>
-            <tr>
-              <th>Date</th>
-              <th>Street</th>
-              <th>Status</th>
-              <th>View</th>
-            </tr>
+          <!-- <table>
+            <thead>
+              <tr>
+                <th>Date Reported</th>
+                <th>Street</th>
+                <th>Status</th>
+                <th>View</th>
+              </tr>
+            </thead> -->
 
-            <!-- <tr v-for="pothole in potholes" v-bind:key="pothole.potholeId">
-              <td>{{ pothole.dateReported }}</td>
-              <td>{{ pothole.crossStreet1 }} {{ pothole.crossStreet2 }}</td>
-              <td>
-                {{ pothole.repairStatus }}
-              </td>
-              <td>
-                <button class="button-35" role="button" v-on:click="show">
-                  View
-                </button>
-              </td>
-            </tr> -->
-
-            <tr class="details" v-if="showDetails">
-              <td colspan="4">
-                <div class="info">
+          <!-- <tbody>
+              <tr v-for="pothole in potholes" v-bind:key="pothole.potholeId">
+                <td>{{ pothole.dateReported }}</td>
+                <td>{{ pothole.crossStreet1 }} & {{ pothole.crossStreet2 }}</td>
+                <td>{{ pothole.repairStatus }}</td>
+                <td>
+                  <button class="button-35" role="button" v-on:click="show">
+                    View
+                  </button>
+                </td>
+              </tr>
+              <tr class="details" v-if="showDetails">
+                <td colspan="4">
+                  <div class="info">
+                    <div class="text">
+                      <div class="pothole-detail">
+                        <h3>Pothole Details</h3>
+                        <h4>Reported Date: {{ pothole.dateReported }}</h4>
+                        <h4>
+                          Nearest Intersection: {{ pothole.crossStreet1 }} &
+                          {{ pothole.crossStreet2 }}
+                        </h4>
+                        <h4>Severity: {{ pothole.severity }}</h4>
+                      </div>
+                      <div class="contact">
+                        <h3>Contact Info</h3>
+                        <h4>{{ pothole.contactName }}</h4>
+                        <h4>{{ pothole.contactEmail }}</h4>
+                        <h4>{{ pothole.contactPhone }}</h4>
+                      </div>
+                    </div>
+                    <div class="pothole-img">
+                      <img
+                        src="https://i.postimg.cc/Jn0hvp6f/matt-hoffman-OOi-Ay2l-BZc-unsplash.jpg"
+                        alt=""
+                      />
+                    </div>
+                    <div class="option">
+                      <button class="button-80" role="button" v-on:click="show">
+                        Schedule for Repair
+                      </button>
+                      <button class="button-80" role="button" v-on:click="show">
+                        Mark Complete
+                      </button>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            </tbody> -->
+          <!-- </table> -->
+          <div class="listt">
+            <div class="divTable">
+              <div class="headRow">
+                <div class="divCell">Date Reported</div>
+                <div class="divCell">Street</div>
+                <div class="divCell">Status</div>
+                <div class="divCell">View</div>
+              </div>
+            </div>
+            <div class="divTable">
+              <div
+                class="list-container"
+                v-for="pothole in potholes"
+                v-bind:key="pothole.potholeId"
+              >
+                <div class="row">
+                  <div class="divCell">{{ pothole.dateReported }}</div>
+                  <div class="divCell">
+                    {{ pothole.crossStreet1 }} & {{ pothole.crossStreet2 }}
+                  </div>
+                  <div class="divCell">{{ pothole.repairStatus }}</div>
+                  <div class="divCell">
+                    <button
+                      class="button-35"
+                      role="button"
+                      v-on:click="show(pothole.showDetails)"
+                    >
+                      View
+                    </button>
+                  </div>
+                </div>
+                <div class="info" v-if="pothole.showDetails">
                   <div class="text">
                     <div class="pothole-detail">
                       <h3>Pothole Details</h3>
-                      <h4>Date: 2022-04-15</h4>
-                      <h4>Street: This is street name</h4>
-                      <h4>Severity: High</h4>
+                      <h4>Reported Date: {{ pothole.dateReported }}</h4>
+                      <h4>
+                        Nearest Intersection: {{ pothole.crossStreet1 }} &
+                        {{ pothole.crossStreet2 }}
+                      </h4>
+                      <h4>Severity: {{ pothole.severity }}</h4>
                     </div>
                     <div class="contact">
                       <h3>Contact Info</h3>
-                      <h4>Name: Jane Doe</h4>
-                      <h4>Email: janedoe@gmail.com</h4>
-                      <h4>Phone: 444-4444-4444</h4>
+                      <h4>{{ pothole.contactName }}</h4>
+                      <h4>{{ pothole.contactEmail }}</h4>
+                      <h4>{{ pothole.contactPhone }}</h4>
                     </div>
                   </div>
                   <div class="pothole-img">
@@ -63,16 +146,16 @@
                   </div>
                   <div class="option">
                     <button class="button-80" role="button" v-on:click="show">
-                      Sechedual
+                      Schedule for Repair
                     </button>
                     <button class="button-80" role="button" v-on:click="show">
-                      Repair
+                      Mark Complete
                     </button>
                   </div>
                 </div>
-              </td>
-            </tr>
-          </table>
+              </div>
+            </div>
+          </div>
         </div>
         <div id="map">
           <l-map style="height: 1000px" :zoom="zoom" :center="center">
@@ -90,12 +173,6 @@
                 {{ pothole.dateReported }}</l-popup
               >
             </l-marker>
-            <l-marker :lat-lng="[lat, lng]" v-if="showForm"
-              ><lIcon
-                icon-url="https://i.postimg.cc/rmwdTRPL/imageedit-1-9960213275.png"
-                :icon-size="[40, 40]"
-              ></lIcon
-            ></l-marker>
           </l-map>
         </div>
       </section>
@@ -123,24 +200,87 @@ export default {
         '&copy; <a target="_blank" href="http://osm.org/copyright">OpenStreetMap</a> contributors',
       zoom: 13,
       center: [39.961178, -82.998795],
-      pothole: {},
-      potholes: {},
-      showDetails: false,
+      pothole: {
+        potholeId: "",
+        dateReported: "",
+        latitude: "",
+        longitude: "",
+        imageUrl: "",
+        showDetails: "",
+      },
+      potholes: [],
+
       lat: "",
       lng: "",
+      scheduled: false,
+      unscheduled: false,
+      completed: false,
     };
   },
   methods: {
     getPotholes() {
-      PotholeService.list().then((response) => {
+      PotholeService.getVerifiedPotholes().then((response) => {
         this.potholes = response.data;
+        this.potholes.forEach((pothole) => {
+          pothole.showDetails = false;
+        });
       });
     },
-    show() {
-      if (this.showDetails == true) {
-        this.showDetails = false;
+    show(pothole) {
+      if (pothole == true) {
+        pothole = false;
       } else {
-        this.showDetails = true;
+        pothole = true;
+      }
+    },
+    getScheduledPotholes() {
+      if (!this.scheduled) {
+        PotholeService.listScheduled().then((response) => {
+          this.unscheduled = false;
+          this.completed = false;
+          this.potholes = response.data;
+        });
+      } else {
+        this.scheduled = false;
+        PotholeService.getVerifiedPotholes().then((response) => {
+          this.potholes = response.data;
+        });
+      }
+    },
+    getUnscheduledPotholes() {
+      if (!this.unscheduled) {
+        PotholeService.listUnscheduled().then((response) => {
+          this.scheduled = false;
+          this.completed = false;
+          this.potholes = response.data;
+        });
+      } else {
+        this.unscheduled = false;
+        PotholeService.getVerifiedPotholes().then((response) => {
+          this.potholes = response.data;
+        });
+      }
+    },
+    getCompletedPotholes() {
+      if (!this.completed) {
+        PotholeService.listRepaired().then((response) => {
+          this.unscheduled = false;
+          this.scheduled = false;
+          this.potholes = response.data;
+        });
+      } else {
+        this.completed = false;
+        PotholeService.getVerifiedPotholes().then((response) => {
+          this.potholes = response.data;
+        });
+      }
+    },
+    showPotholeDetails(id) {
+      for (let i = 0; i < this.potholes.length; i++) {
+        if (this.potholes[i].potholeId === id) {
+          this.potholes[i].showDetails = !this.potholes[i].showDetails;
+          console.log(this.potholes[i].showDetails);
+        }
       }
     },
   },
@@ -208,7 +348,7 @@ input:checked[type="checkbox"]:before {
   min-height: 100vh;
 }
 .list {
-  width: 70%;
+  width: 90%;
   height: 850px;
   display: flex;
   flex-direction: column;
@@ -358,5 +498,27 @@ section {
 
 .button-80:not(:disabled):active {
   transform: translateY(0.125rem);
+}
+.headRow > .divCell {
+  width: 20%;
+  text-align: center;
+  font-weight: 700;
+}
+.headRow {
+  display: flex;
+  justify-content: space-around;
+  padding: 1em;
+  margin: 1.5em 1.5em;
+  border-bottom: 1px solid #888;
+}
+.row > .divCell {
+  width: 20%;
+}
+.row {
+  display: flex;
+  justify-content: space-around;
+  padding: 1em;
+  margin: 1.5em 1.5em;
+  border-bottom: 1px solid #888;
 }
 </style>

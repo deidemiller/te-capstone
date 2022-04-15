@@ -19,4 +19,5 @@ public interface PotholeDao {
     Integer countRepaired();
     Integer countUnscheduled();
     Integer countScheduled();
+    List<Pothole> getAllVerifiedPotholes();
 }
