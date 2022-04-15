@@ -3,15 +3,15 @@
     <div class="review">
       <div class="filter">
         <div class="status-button">
-          <h4>Pending</h4>
+          <h4>Repair</h4>
+          <input type="checkbox" />
+        </div>
+        <div class="status-button">
+          <h4>Sechedual</h4>
           <input type="checkbox" />
         </div>
         <div class="status-button">
           <h4>Complete</h4>
-          <input type="checkbox" />
-        </div>
-        <div class="status-button">
-          <h4>Confirm</h4>
           <input type="checkbox" />
         </div>
       </div>
@@ -42,7 +42,36 @@
               </tr>
               <tr class="details" v-if="showDetails">
                 <td colspan="4">
-                  <div class="info"><h1>This is details</h1></div>
+                  <div class="info">
+                    <div class="text">
+                      <div class="pothole-detail">
+                        <h3>Pothole Details</h3>
+                        <h4>Date: 2022-04-15</h4>
+                        <h4>Street: This is street name</h4>
+                        <h4>Severity: High</h4>
+                      </div>
+                      <div class="contact">
+                        <h3>Contact Info</h3>
+                        <h4>Name: Jane Doe</h4>
+                        <h4>Email: janedoe@gmail.com</h4>
+                        <h4>Phone: 444-4444-4444</h4>
+                      </div>
+                    </div>
+                    <div class="pothole-img">
+                      <img
+                        src="https://i.postimg.cc/Jn0hvp6f/matt-hoffman-OOi-Ay2l-BZc-unsplash.jpg"
+                        alt=""
+                      />
+                    </div>
+                    <div class="option">
+                      <button class="button-80" role="button" v-on:click="show">
+                        Sechedual
+                      </button>
+                      <button class="button-80" role="button" v-on:click="show">
+                        Repair
+                      </button>
+                    </div>
+                  </div>
                 </td>
               </tr>
             </tbody>
@@ -212,12 +241,22 @@ section {
 }
 .details {
   width: 80%;
-  height: 200px;
 }
 .info {
-  height: 150px;
   border: 1px solid rgba(136, 136, 136, 0.276);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.19);
+  display: flex;
+  flex-direction: row;
+  padding: 2em 5em;
+  align-items: center;
+  justify-content: space-between;
+}
+.info h4 {
+  border-bottom: 1px solid rgba(136, 136, 136, 0.276);
+}
+.text {
+  display: flex;
+  flex-direction: column;
 }
 .button-35 {
   align-items: center;
@@ -249,5 +288,80 @@ section {
 
 .button-35:hover {
   box-shadow: #121212 0 0 0 3px, transparent 0 0 0 0;
+}
+.pothole-img {
+  width: 30%;
+  height: 30%;
+}
+.pothole-img img {
+  width: 100%;
+}
+.option {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: stretch;
+  column-gap: 2em;
+}
+
+.button-80 {
+  background: #fff;
+  backface-visibility: hidden;
+  border-radius: 0.375rem;
+  border-style: solid;
+  border-width: 0.125rem;
+  box-sizing: border-box;
+  color: #212121;
+  cursor: pointer;
+  display: inline-block;
+  font-family: Circular, Helvetica, sans-serif;
+  font-size: 1.125rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+  padding: 0.875rem 1.125rem;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  transform: translateZ(0) scale(1);
+  transition: transform 0.2s;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  margin: 2em;
+}
+
+.button-80:not(:disabled):hover {
+  transform: scale(1.05);
+}
+
+.button-80:not(:disabled):hover:active {
+  transform: scale(1.05) translateY(0.125rem);
+}
+
+.button-80:focus {
+  outline: 0 solid transparent;
+}
+
+.button-80:focus:before {
+  content: "";
+  left: calc(-1 * 0.375rem);
+  pointer-events: none;
+  position: absolute;
+  top: calc(-1 * 0.375rem);
+  transition: border-radius;
+  user-select: none;
+}
+
+.button-80:focus:not(:focus-visible) {
+  outline: 0 solid transparent;
+}
+
+.button-80:focus:not(:focus-visible):before {
+  border-width: 0;
+}
+
+.button-80:not(:disabled):active {
+  transform: translateY(0.125rem);
 }
 </style>
