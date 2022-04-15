@@ -32,7 +32,7 @@ public class PotholeController {
         potholeDao.deletePothole(id);
     }
 
-    @RequestMapping(path = "potholes/status/update", method = RequestMethod.PUT)
+    @RequestMapping(path = "/potholes/status/update", method = RequestMethod.PUT)
     public void updatePothole(@RequestBody Pothole pothole) {
         potholeDao.updatePotholeStatus(pothole);
     }
