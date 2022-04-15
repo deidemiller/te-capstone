@@ -91,5 +91,9 @@ public class PotholeController {
     public List<Pothole> getVerifiedPotholes() {
         return potholeDao.getAllVerifiedPotholes();
     }
+    @RequestMapping(path = "/potholes/showStatus", method = RequestMethod.PUT)
+    public void updateShowDetails(@RequestBody Pothole pothole) {
+        potholeDao.showDetails(pothole);
+    }
 
 }

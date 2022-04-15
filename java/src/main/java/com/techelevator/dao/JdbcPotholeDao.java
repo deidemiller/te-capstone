@@ -200,6 +200,12 @@ public class JdbcPotholeDao  implements PotholeDao{
         return potholeList;
     }
 
+    @Override
+    public void showDetails(Pothole pothole) {
+        String sql = "UPDATE pothole SET showDetails = ? WHERE pothole_id = ?";
+        jdbcTemplate.update(sql, pothole.isShowStatus(), pothole.getPotholeId());
+    }
+
     private Pothole mapRowToPothole(SqlRowSet results) {
         Pothole pothole = new Pothole();
         pothole.setPotholeId(results.getInt("pothole_id"));

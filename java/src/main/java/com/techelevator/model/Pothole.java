@@ -19,6 +19,15 @@ public class Pothole {
     private String repairStatus;
     private Date repairDate;
     private boolean isInspected;
+    private boolean showStatus;
+
+    public boolean isShowStatus() {
+        return showStatus;
+    }
+
+    public void setShowStatus(boolean showStatus) {
+        this.showStatus = showStatus;
+    }
 
     public boolean isInspected() {
         return isInspected;

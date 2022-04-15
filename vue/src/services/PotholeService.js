@@ -48,5 +48,8 @@ export default {
   },
   getVerifiedPotholes() {
     return http.get('/potholes/verified');
+  },
+  updateShowStatus(pothole) {
+    return http.put('potholes/showStatus', pothole);
   }
 };
