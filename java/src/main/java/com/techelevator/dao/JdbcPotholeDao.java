@@ -4,6 +4,7 @@ import com.techelevator.model.Pothole;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import javax.sql.DataSource;
 import java.time.LocalDate;
@@ -11,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+@CrossOrigin
 @Component
 public class JdbcPotholeDao  implements PotholeDao{
     private JdbcTemplate jdbcTemplate;
