@@ -120,7 +120,7 @@
                     </button>
                   </div>
                 </div>
-                <div class="info" v-if="pothole.showDetails">
+                <div class="info" v-show="pothole.showDetails === true">
                   <div class="text">
                     <div class="pothole-detail">
                       <h3>Pothole Details</h3>
@@ -215,13 +215,14 @@ export default {
       scheduled: false,
       unscheduled: false,
       completed: false,
+      details: false,
     };
   },
   methods: {
     getPotholes() {
       PotholeService.getVerifiedPotholes().then((response) => {
         this.potholes = response.data;
-        });
+      });
     },
     show(pothole) {
       if (pothole == true) {
@@ -236,11 +237,6 @@ export default {
           this.unscheduled = false;
           this.completed = false;
           this.potholes = response.data;
-          this.potholes.forEach((pothole) => {
-            if (pothole.potholeId === id) {
-              pothole.showDetails = true;
-            }
-          });
         });
       } else {
         this.scheduled = false;
@@ -289,51 +285,85 @@ export default {
     },
     showDetailsScheduled(id) {
       PotholeService.listScheduled().then((response) => {
-          this.unscheduled = false;
-          this.completed = false;
-          this.potholes = response.data;
-          this.potholes.forEach((pothole) => {
-            if (pothole.potholeId === id) {
+        this.unscheduled = false;
+        this.completed = false;
+        this.potholes = response.data;
+        this.potholes.forEach((pothole) => {
+          if (pothole.potholeId === id) {
+            if (this.details) {
+              pothole.showDetails = false;
+              this.details = !this.details;
+            } else {
               pothole.showDetails = true;
+              this.details = !this.details;
             }
-          });
+
+            // pothole.showDetails = !pothole.showDetails;
+            // if (pothole.showDetails === false) {
+            //   pothole.showDetails = true;
+            //   }
+          }
         });
+      });
     },
     showDetailUnscheduled(id) {
       PotholeService.listUnscheduled().then((response) => {
-          this.scheduled = false;
-          this.completed = false;
-          this.potholes = response.data;
-          this.potholes.forEach((pothole) => {
-            if (pothole.potholeId === id) {
+        this.scheduled = false;
+        this.completed = false;
+        this.potholes = response.data;
+        this.potholes.forEach((pothole) => {
+          if (pothole.potholeId === id) {
+            if (this.details) {
+              pothole.showDetails = false;
+              this.details = !this.details;
+            } else {
               pothole.showDetails = true;
+              this.details = !this.details;
             }
-          });
+          }
         });
+      });
     },
     showDetailsCompleted(id) {
       PotholeService.listRepaired().then((response) => {
-          this.unscheduled = false;
-          this.scheduled = false;
-          this.potholes = response.data;
-          this.potholes.forEach((pothole) => {
-            if (pothole.potholeId === id) {
-              if (pothole.showDetails === true) {
-                pothole.showDetails = false;
-                PotholeService.updateShowStatus(pothole).then(response =>{
-                  if (response.status === 200) {
-                    console.log('cool');
-                  }
-                }
-                )
-              } 
+        this.unscheduled = false;
+        this.scheduled = false;
+        this.potholes = response.data;
+        this.potholes.forEach((pothole) => {
+          if (pothole.potholeId === id) {
+            if (this.details) {
+              pothole.showDetails = false;
+              this.details = !this.details;
+            } else {
+              pothole.showDetails = true;
+              this.details = !this.details;
             }
-          });
+          }
         });
+      });
+    },
+    showDetailsAll(id) {
+      PotholeService.getVerifiedPotholes().then(response => {
+        this.scheduled = false;
+        this.unscheduled = false;
+        this.completed = false;
+        this.potholes = response.data;
+        this.potholes.forEach(pothole => {
+          if (pothole.potholeId === id) {
+            if (this.details) {
+              pothole.showDetails = false;
+              this.details = !this.details;
+            } else {
+              pothole.showDetails = true;
+              this.details = !this.details;
+            }
+          }
+        })
+      })
     },
     showDetails(id) {
       if (!this.scheduled && !this.unscheduled && !this.completed) {
-        this.getPotholes(id);
+        this.showDetailsAll(id);
       }
       if (this.scheduled) {
         this.showDetailsScheduled(id);
@@ -346,12 +376,12 @@ export default {
       }
     },
     updatePotholeShowDetails(pothole) {
-      PotholeService.updateShowStatus(pothole).then(response => {
+      PotholeService.updateShowStatus(pothole).then((response) => {
         if (response.status == 200) {
-          console.log('cool');
+          console.log("cool");
         }
-      })
-    }
+      });
+    },
   },
   created() {
     this.getPotholes();
