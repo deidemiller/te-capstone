@@ -99,5 +99,10 @@ public class PotholeController {
     public List<Pothole> getAllReportedPotholes() {
        return potholeDao.getAllReportedPotholes();
     }
+    @RequestMapping(path = "/potholes/update/repair_date", method = RequestMethod.PUT)
+    public void updateRepairDate(@RequestBody Pothole pothole) {
+        potholeDao.updatePotholeRepairDate(pothole);
+    }
+
 
 }

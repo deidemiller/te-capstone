@@ -22,4 +22,6 @@ public interface PotholeDao {
     List<Pothole> getAllVerifiedPotholes();
     void showDetails(Pothole pothole);
     List<Pothole> getAllReportedPotholes();
+    void updatePotholeRepairDate(Pothole pothole);
+
 }
