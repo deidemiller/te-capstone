@@ -51,5 +51,8 @@ export default {
   },
   updateShowStatus(pothole) {
     return http.put('potholes/showStatus', pothole);
+  },
+  getReportedPotholes() {
+    return http.get('/potholes/open/all')
   }
 };
