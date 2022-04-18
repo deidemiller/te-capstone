@@ -1,11 +1,12 @@
 package com.techelevator.model;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Date;
 
 public class Pothole {
     private int potholeId;
-    private Date dateReported;
+    private LocalDate dateReported;
     private BigDecimal latitude;
     private BigDecimal longitude;
     private String imageUrl;
@@ -17,7 +18,7 @@ public class Pothole {
     private boolean isPending;
     private String severity;
     private String repairStatus;
-    private Date repairDate;
+    private LocalDate repairDate;
     private boolean isInspected;
     private boolean showStatus;
 
@@ -45,11 +46,11 @@ public class Pothole {
         this.repairStatus = repairStatus;
     }
 
-    public Date getRepairDate() {
+    public LocalDate getRepairDate() {
         return repairDate;
     }
 
-    public void setRepairDate(Date repairDate) {
+    public void setRepairDate(LocalDate repairDate) {
         this.repairDate = repairDate;
     }
 
@@ -117,11 +118,11 @@ public class Pothole {
         this.potholeId = potholeId;
     }
 
-    public Date getDateReported() {
+    public LocalDate getDateReported() {
         return dateReported;
     }
 
-    public void setDateReported(Date dateReported) {
+    public void setDateReported(LocalDate dateReported) {
         this.dateReported = dateReported;
     }
 
