@@ -20,6 +20,11 @@
             icon="fa-solid fa-list-check"
           />Review</router-link
         >
+        <router-link tag="li" to="/dashboard/sechdule"
+          ><font-awesome-icon
+            icon="fa-solid fa-calendar-days"
+          />Sechdule</router-link
+        >
       </ul>
     </div>
     <div class="container-dashboard">

@@ -8,6 +8,7 @@ import store from "../store/index";
 import PotholeMap from "../views/PotholeMapView.vue";
 import DashMain from "../components/DashboardMain.vue";
 import DashReview from "../components/DashboardReview.vue";
+import DashSchedule from "../components/DashboardSchedule.vue";
 import DashBoard from "../views/DashBoardView.vue";
 import DashboardReviewView from "../views/DashboardReviewView";
 import DashboardMainView from "../views/DashboardMainView";
@@ -80,6 +81,10 @@ const router = new Router({
           path: "review",
           component: DashReview,
         },
+        {
+          path: "sechdule",
+          component: DashSchedule,
+        },
       ],
       meta: {
         requiresAuth: false,
@@ -100,7 +105,7 @@ const router = new Router({
       meta: {
         requiresAuth: false,
       },
-    }
+    },
   ],
 });
 

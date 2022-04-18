@@ -1,11 +1,13 @@
 <template>
   <div class="major container">
     <h3>
-      We conduct experiments that
+      We provide a platform
       <br />
-      may or may not seriously
+      for citizens to report and 
       <br />
-      break the universe
+      cities to respond quickly 
+      <br />
+      to problem road conditions
     </h3>
   </div>
 </template>

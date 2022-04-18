@@ -33,7 +33,7 @@ export default {
 <style>
 #footer {
   background-attachment: scroll;
-  background-color: #4eb980;
+  background-color: #23395B;
   background-image: url("../assets/images/bottom-3200.svg");
   background-position: top center;
   background-repeat: repeat-x;
