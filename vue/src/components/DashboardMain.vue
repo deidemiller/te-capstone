@@ -103,13 +103,16 @@
             <div class="table">
               <table>
                 <tr>
-                  <th>Profile</th>
+                  <!-- <th>Profile</th> -->
+                  <th>Title</th>
                   <th>Name</th>
+                  <!-- <th>Availability</th> -->
                   <th>Availability</th>
                 </tr>
-                <tr>
-                  <td><img src="../assets/images/e1.jpg" alt="" /></td>
-                  <td>John Doe</td>
+                <tr v-for="employee in employees" v-bind:key = "employee.employee_id">
+                  <!-- <td><img src="../assets/images/e1.jpg" alt="" /></td> -->
+                  <td>{{employee.title}}</td>
+                  <td>{{employee.firstName}} {{employee.lastName}}</td>
                   <td>
                     <font-awesome-icon
                       icon="fa-solid fa-calendar-check"
@@ -118,7 +121,7 @@
                     />
                   </td>
                 </tr>
-                <tr>
+                <!-- <tr>
                   <td><img src="../assets/images/e4.jpg" alt="" /></td>
                   <td>Jane Doe</td>
                   <td>
@@ -139,7 +142,7 @@
                       :style="{ color: 'green' }"
                     />
                   </td>
-                </tr>
+                </tr> -->
               </table>
             </div>
           </div>
@@ -151,7 +154,7 @@
 
 <script scoped>
 import PotholeService from "../services/PotholeService";
-
+import EmployeeService from "../services/EmployeeService";
 export default {
   name: "dashboard-main",
   data() {
@@ -161,12 +164,18 @@ export default {
       completed: 0,
       scheduled: 0,
       unScheduled: 0,
+      employees: [],
     };
   },
   methods: {
     getPendingPotholes() {
       PotholeService.listPending().then((response) => {
         this.pendingPotholes = response.data;
+      });
+    },
+    getEmployees() {
+      EmployeeService.listEmployees().then(response => {
+        this.employees = response.data;
       });
     },
     deletePothole(id) {
@@ -213,6 +222,7 @@ export default {
     this.completedPotholes();
     this.scheduledPotholes();
     this.unScheduledPotholes();
+    this.getEmployees();
   },
 };
 </script>
