@@ -28,67 +28,55 @@
         </div>
       </div>
       <section>
-        <div class="list">
-          <!-- <table>
-            <thead>
-              <tr>
-                <th>Date Reported</th>
-                <th>Street</th>
-                <th>Status</th>
-                <th>View</th>
-              </tr>
-            </thead> -->
-
-          <!-- <tbody>
-              <tr v-for="pothole in potholes" v-bind:key="pothole.potholeId">
-                <td>{{ pothole.dateReported }}</td>
-                <td>{{ pothole.crossStreet1 }} & {{ pothole.crossStreet2 }}</td>
-                <td>{{ pothole.repairStatus }}</td>
-                <td>
-                  <button class="button-35" role="button" v-on:click="show">
-                    View
-                  </button>
-                </td>
-              </tr>
-              <tr class="details" v-if="showDetails">
-                <td colspan="4">
-                  <div class="info">
-                    <div class="text">
-                      <div class="pothole-detail">
-                        <h3>Pothole Details</h3>
-                        <h4>Reported Date: {{ pothole.dateReported }}</h4>
-                        <h4>
-                          Nearest Intersection: {{ pothole.crossStreet1 }} &
-                          {{ pothole.crossStreet2 }}
-                        </h4>
-                        <h4>Severity: {{ pothole.severity }}</h4>
-                      </div>
-                      <div class="contact">
-                        <h3>Contact Info</h3>
-                        <h4>{{ pothole.contactName }}</h4>
-                        <h4>{{ pothole.contactEmail }}</h4>
-                        <h4>{{ pothole.contactPhone }}</h4>
-                      </div>
+        <transition name="fade" appear>
+          <div class="overlay" v-if="showS">
+            <transition name="slide" appear>
+              <div class="schedule-container">
+                <form class="schedule-form">
+                  <h1>Schedule Form</h1>
+                  <div>
+                    <div class="id">
+                      <label for="id">Pothole#</label>
+                      <input id="id" type="text" />
                     </div>
-                    <div class="pothole-img">
-                      <img
-                        src="https://i.postimg.cc/Jn0hvp6f/matt-hoffman-OOi-Ay2l-BZc-unsplash.jpg"
-                        alt=""
-                      />
+                    <div class="date">
+                      <label for="date">Date</label>
+                      <input id="date" type="date" />
                     </div>
-                    <div class="option">
-                      <button class="button-80" role="button" v-on:click="show">
-                        Schedule for Repair
+                    <div class="time">
+                      <label for="time">Time</label>
+                      <input id="time" type="time" />
+                    </div>
+                    <div class="employee">
+                      <label for="severity">Employee</label>
+                      <select name="employee" id="employee">
+                        <option value="">Jane Doe</option>
+                        <option value="">John Doe</option>
+                      </select>
+                    </div>
+                    <div class="schedule-button">
+                      <button
+                        class="button-28 button-submit"
+                        role="button"
+                        type="submit"
+                      >
+                        Submit
                       </button>
-                      <button class="button-80" role="button" v-on:click="show">
-                        Mark Complete
+                      <button
+                        class="button-28 button-cancel"
+                        role="button"
+                        v-on:click="showS = false"
+                      >
+                        Cancel
                       </button>
                     </div>
                   </div>
-                </td>
-              </tr>
-            </tbody> -->
-          <!-- </table> -->
+                </form>
+              </div>
+            </transition>
+          </div>
+        </transition>
+        <div class="list">
           <div class="listt">
             <div class="divTable">
               <div class="headRow">
@@ -145,7 +133,11 @@
                     />
                   </div>
                   <div class="option">
-                    <button class="button-80" role="button" v-on:click="show">
+                    <button
+                      class="button-80"
+                      role="button"
+                      v-on:click="showS = true"
+                    >
                       Schedule for Repair
                     </button>
                     <button class="button-80" role="button" v-on:click="show">
@@ -209,7 +201,7 @@ export default {
         showDetails: "",
       },
       potholes: [],
-
+      showS: false,
       lat: "",
       lng: "",
       scheduled: false,
@@ -343,12 +335,12 @@ export default {
       });
     },
     showDetailsAll(id) {
-      PotholeService.getVerifiedPotholes().then(response => {
+      PotholeService.getVerifiedPotholes().then((response) => {
         this.scheduled = false;
         this.unscheduled = false;
         this.completed = false;
         this.potholes = response.data;
-        this.potholes.forEach(pothole => {
+        this.potholes.forEach((pothole) => {
           if (pothole.potholeId === id) {
             if (this.details) {
               pothole.showDetails = false;
@@ -358,8 +350,8 @@ export default {
               this.details = !this.details;
             }
           }
-        })
-      })
+        });
+      });
     },
     showDetails(id) {
       if (!this.scheduled && !this.unscheduled && !this.completed) {
@@ -469,6 +461,7 @@ section {
   width: 100%;
   display: flex;
   flex-direction: row;
+  position: relative;
 }
 #map {
   width: 30%;
@@ -619,5 +612,137 @@ section {
   padding: 1em;
   margin: 1.5em 1.5em;
   border-bottom: 1px solid #888;
+}
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 100%;
+  z-index: 100;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+.schedule-container {
+  border: 1px solid rgba(136, 136, 136, 0.276);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.19);
+  background-color: white;
+  height: 65%;
+  width: 65%;
+  margin: 5%;
+}
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
+
+.slide-enter-active,
+.slide-leave-active {
+  transition: transform 0.5s;
+}
+.slide-enter,
+.slide-leave-to {
+  transform: translateY(50%);
+}
+.schedule-form {
+  border-radius: 5px;
+  padding: 2.5em 7.25em 2.5em 4em;
+  margin-bottom: 1.75em;
+  font-size: 1em;
+  letter-spacing: 0.125em;
+  text-align: center;
+}
+.schedule-form h1 {
+  margin-bottom: 2em;
+  font-size: 1.8em;
+}
+.date,
+.time,
+.employee,
+.id {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  justify-items: center;
+  align-items: baseline;
+  margin: 1.8em;
+}
+.schedule-form label {
+  font-size: 1.2em;
+  font-weight: 700;
+  width: 30%;
+}
+.schedule-form input,
+.schedule-form select {
+  width: 50%;
+  border: none;
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.1);
+}
+#employee {
+  font-size: 1rem;
+  padding: 1rem 2.5rem;
+  border-radius: 2px;
+  background-color: rgba(255, 255, 255, 0.5);
+  border: none;
+  border-bottom: 3px solid transparent;
+  width: 50%;
+  display: block;
+}
+.schedule-button {
+  display: flex;
+  flex-direction: row;
+  justify-content: s;
+}
+.button-28 {
+  appearance: none;
+  background-color: transparent;
+  border: 2px solid #1a1a1a;
+  border-radius: 15px;
+  box-sizing: border-box;
+  color: #3b3b3b;
+  cursor: pointer;
+  display: inline-block;
+
+  font-size: 16px;
+  font-weight: 600;
+  line-height: normal;
+  margin: 2.5em 1.5em;
+  height: 60px;
+
+  outline: none;
+  padding: 16px 24px;
+  text-align: center;
+  text-decoration: none;
+  transition: all 300ms cubic-bezier(0.23, 1, 0.32, 1);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: 100%;
+  will-change: transform;
+}
+
+.button-28:disabled {
+  pointer-events: none;
+}
+
+.button-submit:hover {
+  color: #fff;
+  background-color: #2978b5;
+  box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
+  transform: translateY(-2px);
+}
+.button-cancel:hover {
+  color: #fff;
+  background-color: red;
+  box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
+  transform: translateY(-2px);
+}
+.button-28:active {
+  box-shadow: none;
+  transform: translateY(0);
 }
 </style>
