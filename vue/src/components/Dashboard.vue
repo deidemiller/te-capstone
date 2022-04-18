@@ -36,7 +36,7 @@
           </div>
           <div class="user">
             <div class="welcome">
-              <h4>Welcome back, John!</h4>
+              <h4>Welcome back, {{$store.state.user.username}}</h4>
             </div>
             <div class="notification">
               <div><font-awesome-icon icon="fa-solid fa-bell" /></div>
