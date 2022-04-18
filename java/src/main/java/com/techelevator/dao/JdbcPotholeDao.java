@@ -1,5 +1,6 @@
 package com.techelevator.dao;
 
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 import com.techelevator.model.Pothole;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
@@ -9,7 +10,6 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import javax.sql.DataSource;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @CrossOrigin
@@ -223,10 +223,17 @@ public class JdbcPotholeDao  implements PotholeDao{
         return potholeList;
     }
 
+    @Override
+    public void updatePotholeRepairDate(Pothole pothole) {
+        String sql = "UPDATE pothole SET repair_date = ? WHERE pothole_id = ?";
+        System.out.println(pothole.getRepairDate());
+        jdbcTemplate.update(sql, pothole.getRepairDate(), pothole.getPotholeId());
+    }
+
     private Pothole mapRowToPothole(SqlRowSet results) {
         Pothole pothole = new Pothole();
         pothole.setPotholeId(results.getInt("pothole_id"));
-        pothole.setDateReported(results.getDate("date_reported"));
+        pothole.setDateReported(LocalDate.parse(results.getString("date_reported")));
         pothole.setLatitude(results.getBigDecimal("latitude").setScale(6));
         pothole.setLongitude(results.getBigDecimal("longitude").setScale(6));
         pothole.setImageUrl(results.getString("image_location"));
@@ -239,8 +246,9 @@ public class JdbcPotholeDao  implements PotholeDao{
         pothole.setSeverity(results.getString("severity"));
         pothole.setInspected(results.getBoolean("inspected"));
         pothole.setRepairStatus(results.getString("repair_status"));
-        if (results.getDate("repair_date") != null) {
-            pothole.setRepairDate(results.getDate("repair_date"));
+        if (results.getString("repair_date") != null) {
+            pothole.setRepairDate(LocalDate.parse(results.getString("repair_date")));
+            System.out.println(pothole.getRepairDate());
         }
         return pothole;
     }
