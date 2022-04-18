@@ -226,7 +226,6 @@ public class JdbcPotholeDao  implements PotholeDao{
     @Override
     public void updatePotholeRepairDate(Pothole pothole) {
         String sql = "UPDATE pothole SET repair_date = ? WHERE pothole_id = ?";
-        System.out.println(pothole.getRepairDate());
         jdbcTemplate.update(sql, pothole.getRepairDate(), pothole.getPotholeId());
     }
 
@@ -248,7 +247,6 @@ public class JdbcPotholeDao  implements PotholeDao{
         pothole.setRepairStatus(results.getString("repair_status"));
         if (results.getString("repair_date") != null) {
             pothole.setRepairDate(LocalDate.parse(results.getString("repair_date")));
-            System.out.println(pothole.getRepairDate());
         }
         return pothole;
     }

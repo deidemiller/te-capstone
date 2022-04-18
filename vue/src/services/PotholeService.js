@@ -54,5 +54,9 @@ export default {
   },
   getReportedPotholes() {
     return http.get('/potholes/open/all')
+  },
+  updateRepairDate(pothole) {
+    return http.put('/potholes/update/repair_date', pothole)
   }
+
 };

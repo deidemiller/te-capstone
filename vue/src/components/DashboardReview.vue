@@ -32,21 +32,21 @@
           <div class="overlay" v-if="showS">
             <transition name="slide" appear>
               <div class="schedule-container">
-                <form class="schedule-form">
+                <form class="schedule-form" v-on:submit.prevent = "scheduleRepair()">
                   <h1>Schedule Form</h1>
                   <div>
                     <div class="id">
-                      <label for="id">Pothole#</label>
-                      <input id="id" type="text" />
+                      <label for="id">Pothole ID</label>
+                      <input id="id" type="text" v-model = "potholeIdForRepair"/>
                     </div>
                     <div class="date">
                       <label for="date">Date</label>
-                      <input id="date" type="date" />
+                      <input id="date" type="date" v-model = "dateForRepair"/>
                     </div>
-                    <div class="time">
+                    <!-- <div class="time">
                       <label for="time">Time</label>
                       <input id="time" type="time" />
-                    </div>
+                    </div> -->
                     <div class="employee">
                       <label for="severity">Employee</label>
                       <select name="employee" id="employee">
@@ -65,7 +65,7 @@
                       <button
                         class="button-28 button-cancel"
                         role="button"
-                        v-on:click="showS = false"
+                        v-on:click.prevent = "showS = false"
                       >
                         Cancel
                       </button>
@@ -112,12 +112,14 @@
                   <div class="text">
                     <div class="pothole-detail">
                       <h3>Pothole Details</h3>
+                      <h4>Pothole ID: {{pothole.potholeId}}</h4>
                       <h4>Reported Date: {{ pothole.dateReported }}</h4>
                       <h4>
                         Nearest Intersection: {{ pothole.crossStreet1 }} &
                         {{ pothole.crossStreet2 }}
                       </h4>
                       <h4>Severity: {{ pothole.severity }}</h4>
+                      <h4 v-if = "pothole.repairDate != undefined">Repair Date: {{pothole.repairDate}}</h4>
                     </div>
                     <div class="contact">
                       <h3>Contact Info</h3>
@@ -192,6 +194,8 @@ export default {
         '&copy; <a target="_blank" href="http://osm.org/copyright">OpenStreetMap</a> contributors',
       zoom: 13,
       center: [39.961178, -82.998795],
+      potholeIdForRepair: -1,
+      dateForRepair: "",
       pothole: {
         potholeId: "",
         dateReported: "",
@@ -212,6 +216,7 @@ export default {
   },
   methods: {
     getPotholes() {
+      this.details = false;
       PotholeService.getVerifiedPotholes().then((response) => {
         this.potholes = response.data;
       });
@@ -224,6 +229,7 @@ export default {
       }
     },
     getScheduledPotholes(id) {
+      this.details = false;
       if (!this.scheduled) {
         PotholeService.listScheduled().then((response) => {
           this.unscheduled = false;
@@ -238,6 +244,7 @@ export default {
       }
     },
     getUnscheduledPotholes(id) {
+      this.details = false;
       if (!this.unscheduled) {
         PotholeService.listUnscheduled().then((response) => {
           this.scheduled = false;
@@ -257,6 +264,7 @@ export default {
       }
     },
     getCompletedPotholes(id) {
+      this.details = false;
       if (!this.completed) {
         PotholeService.listRepaired().then((response) => {
           this.unscheduled = false;
@@ -354,6 +362,7 @@ export default {
       });
     },
     showDetails(id) {
+      this.potholeIdForRepair = id;
       if (!this.scheduled && !this.unscheduled && !this.completed) {
         this.showDetailsAll(id);
       }
@@ -367,13 +376,25 @@ export default {
         this.showDetailsCompleted(id);
       }
     },
-    updatePotholeShowDetails(pothole) {
-      PotholeService.updateShowStatus(pothole).then((response) => {
-        if (response.status == 200) {
-          console.log("cool");
-        }
+    scheduleRepair() {
+
+      let potholeToSchedule = {};
+      for (let i = 0; i < this.potholes.length; i++) {
+        if (this.potholes[i].potholeId === this.potholeIdForRepair) {
+          potholeToSchedule = this.potholes[i];
+          break;
+        } 
+      } 
+      potholeToSchedule.repairDate = this.dateForRepair;
+      potholeToSchedule.repairStatus = 'scheduled'; 
+      PotholeService.updateRepairDate(potholeToSchedule).then(response => {
+        console.log(response.status);
+        console.log(potholeToSchedule);
+        PotholeService.updateRepairStatus(potholeToSchedule);
       });
-    },
+      this.showS = false;
+      this.details = false;
+    }
   },
   created() {
     this.getPotholes();
