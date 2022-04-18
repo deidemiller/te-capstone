@@ -8,7 +8,7 @@
       <div>
         <div class="pending-button">
           <h4>Show Pending Potholes:</h4>
-          <input type="checkbox" />
+          <input type="checkbox" v-on:click="toggleShowPending()" />
         </div>
         <form
           class="pothole-form"
@@ -37,7 +37,11 @@
             <div class="severity">
               <h1>Choose Severity:</h1>
               <label for="severity">Choose Severity:</label>
-              <select name="severity" id="severity" v-model="newPothole.severity">
+              <select
+                name="severity"
+                id="severity"
+                v-model="newPothole.severity"
+              >
                 <option value="low">Low</option>
                 <option value="moderate">Moderate</option>
                 <option value="high">High</option>
@@ -143,20 +147,25 @@ export default {
         longitude: "",
         imageUrl: "",
       },
-      potholes: {},
+      potholes: [],
       showForm: false,
-
+      showPending: false,
       lat: "",
       lng: "",
       newPothole: {
         pending: true,
-        repairStatus: 'unscheduled'
+        repairStatus: "unscheduled",
       },
     };
   },
   methods: {
     getPotholes() {
       PotholeService.list().then((response) => {
+        this.potholes = response.data;
+      });
+    },
+    getReportedPotholes() {
+      PotholeService.getReportedPotholes().then((response) => {
         this.potholes = response.data;
       });
     },
@@ -177,20 +186,25 @@ export default {
       this.newPothole.longitude = e.latlng.lng;
       this.newPothole.dateReported = reportedDate;
       this.newPothole.pending = true;
-      this.newPothole.repairStatus = 'unscheduled';
-      this.newPothole.inspected = 'false';
+      this.newPothole.repairStatus = "unscheduled";
+      this.newPothole.inspected = "false";
     },
     submitForm() {
       PotholeService.add(this.newPothole).then((response) => {
         if (response.status === 201 || response.status === 200) {
           console.log("success");
-          this.getPotholes();
+          if (!this.showPending) {
+            this.getPotholes();
+          } else {
+            this.getReportedPotholes();
+          }
+
           alert(
             "This has been successfully added! Thank you for helping make our roads safer!"
           );
           this.newPothole = {
             pending: true,
-            repairStatus: 'unscheduled'
+            repairStatus: "unscheduled",
           };
         }
       });
@@ -200,6 +214,15 @@ export default {
     clearForm() {
       this.newPothole = {};
       this.showForm = !this.showForm;
+    },
+    toggleShowPending() {
+      if (this.showPending === false) {
+        this.getReportedPotholes();
+        this.showPending = true;
+      } else {
+        this.getPotholes();
+        this.showPending = false;
+      }
     },
   },
   created() {

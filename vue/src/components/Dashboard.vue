@@ -11,7 +11,7 @@
         </li>
         <li> -->
         <router-link tag="li" to="/dashboard"
-          ><font-awesome-icon icon="fa-solid fa-house" />DashBoard</router-link
+          ><font-awesome-icon icon="fa-solid fa-house" />Dashboard</router-link
         >
         <!-- <font-awesome-icon icon="fa-solid fa-list-check" /><span>Review</span> -->
         <!-- </li> -->

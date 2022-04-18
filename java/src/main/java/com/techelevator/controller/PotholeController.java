@@ -95,5 +95,9 @@ public class PotholeController {
     public void updateShowDetails(@RequestBody Pothole pothole) {
         potholeDao.showDetails(pothole);
     }
+    @RequestMapping(path = "/potholes/open/all", method = RequestMethod.GET)
+    public List<Pothole> getAllReportedPotholes() {
+       return potholeDao.getAllReportedPotholes();
+    }
 
 }
