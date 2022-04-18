@@ -5,12 +5,9 @@
       alt="Logo"
       class="logo"
     />
-    <h1>Pothole Patrol.</h1>
+    <h1>Patrol the Holes</h1>
     <p>
-      Generate Lorem Ipsum placeholder text
-      <br />
-      Select the number of characters, words, sentences or paragraphs, and hit
-      generate!
+      Community pothole reporting to help keep Central Ohio's roads running smooth.
     </p>
 
     <router-link
@@ -32,7 +29,7 @@ export default {
 #header {
   background-attachment: scroll, scroll, fixed;
   background-image: url("../assets/images/top-3200.svg"),
-    url("../assets/images/overlay.png"), url("../assets/images/header.jpg");
+    url("../assets/images/overlay.png"), url("../assets/images/Header2.png");
   background-position: bottom center, top left, center center;
   background-repeat: repeat-x, repeat, no-repeat;
   background-size: 3200px 460px, auto, cover;
