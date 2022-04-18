@@ -138,11 +138,12 @@
                     <button
                       class="button-80"
                       role="button"
+                      v-if="pothole.repairStatus != 'completed'"
                       v-on:click="showS = true"
                     >
                       Schedule for Repair
                     </button>
-                    <button class="button-80" role="button" v-on:click="show">
+                    <button class="button-80" role="button" v-on:click="completePothole()" v-if="pothole.repairStatus != 'completed'">
                       Mark Complete
                     </button>
                   </div>
@@ -388,16 +389,38 @@ export default {
       potholeToSchedule.repairDate = this.dateForRepair;
       potholeToSchedule.repairStatus = 'scheduled'; 
       PotholeService.updateRepairDate(potholeToSchedule).then(response => {
-        console.log(response.status);
-        console.log(potholeToSchedule);
-        PotholeService.updateRepairStatus(potholeToSchedule);
+        if (response.status === 200) {
+          PotholeService.updateRepairStatus(potholeToSchedule).then(response => {
+            if (response.status === 200) {
+              alert('This pothole has been scheduled for repair.')
+            }
+          });
+          }
       });
       this.showS = false;
       this.details = false;
+    },
+    completePothole() {
+      let potholeToRepair = {};
+      for (let i = 0; i < this.potholes.length; i++) {
+        if (this.potholes[i].potholeId === this.potholeIdForRepair) {
+          potholeToRepair = this.potholes[i];
+          break;
+        } 
+      }
+      PotholeService.repairedPothole(potholeToRepair).then(response =>{
+        if (response.status === 200) {
+          alert('This pothole has been marked repaired.')
+        }
+      }); 
+      this.details = false;
+      potholeToRepair.repairStatus = 'completed';
     }
+
   },
   created() {
     this.getPotholes();
+    
   },
 };
 </script>
