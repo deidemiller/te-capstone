@@ -21,4 +21,5 @@ public interface PotholeDao {
     Integer countScheduled();
     List<Pothole> getAllVerifiedPotholes();
     void showDetails(Pothole pothole);
+    List<Pothole> getAllReportedPotholes();
 }
