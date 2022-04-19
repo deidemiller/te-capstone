@@ -12,24 +12,31 @@
             </tr>
           </thead>
           <tbody>
-            
             <tr v-for="employee in employees" v-bind:key="employee.employeeId">
-              <td>{{employee.title}}</td>
+              <td>{{ employee.title }}</td>
               <td><img src="../assets/images/e1.jpg" alt="" /></td>
-              <td>{{employee.firstName}} {{employee.lastName}}</td>
-              <button class="button-35" role="button" v-on:click = "toggleDetails(employee.employeeId)">
-                View Assigned
+              <td>{{ employee.firstName }} {{ employee.lastName }}</td>
+              <td>
+                <button
+                  class="button-35"
+                  role="button"
+                  v-on:click="toggleDetails(employee.employeeId)"
+                >
+                  View Assigned
                 </button>
+              </td>
             </tr>
             <tr>
               <td colspan="4">
-                <button class="button-35" role="button" v-on:click = "getAllScheduledPotholes()">
+                <button
+                  class="button-35"
+                  role="button"
+                  v-on:click="getAllScheduledPotholes()"
+                >
                   Reset Filter
                 </button>
               </td>
-              
-              </tr>
-            
+            </tr>
           </tbody>
         </table>
       </div>
@@ -45,7 +52,9 @@
           </thead>
           <tbody>
             <tr v-for="pothole in potholes" v-bind:key="pothole.potholeId">
-              <td>{{ pothole.employeeFirstName }} {{pothole.employeeLastName}}</td>
+              <td>
+                {{ pothole.employeeFirstName }} {{ pothole.employeeLastName }}
+              </td>
               <td>{{ pothole.dateReported }}</td>
               <td>{{ pothole.repairDate }}</td>
               <td>{{ pothole.severity }}</td>
@@ -74,9 +83,9 @@ export default {
   showAssigned: false,
   data() {
     return {
-      employees : [],
-      potholes : []
-    }
+      employees: [],
+      potholes: [],
+    };
   },
   methods: {
     getEmployees() {
@@ -86,26 +95,25 @@ export default {
     },
     toggleDetails(id) {
       if (this.showAssigned === false) {
-        PotholeService.getPotholesByEmployeeId(id).then(response => {
-        this.potholes = response.data;
-        this.showAssigned = true;
-      });
+        PotholeService.getPotholesByEmployeeId(id).then((response) => {
+          this.potholes = response.data;
+          this.showAssigned = true;
+        });
       } else {
         this.getAllScheduledPotholes();
-        }
-      
+      }
     },
     getAllScheduledPotholes() {
-      PotholeService.getScheduledPotholesWithEmployeeInfo().then(response => {
+      PotholeService.getScheduledPotholesWithEmployeeInfo().then((response) => {
         this.potholes = response.data;
         this.showAssigned = false;
-      })
-    }
+      });
+    },
   },
   created() {
     this.getEmployees();
     this.getAllScheduledPotholes();
-  }
+  },
 };
 </script>
 
