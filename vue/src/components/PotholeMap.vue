@@ -43,7 +43,9 @@
                 v-model="newPothole.severity"
               >
                 <option value="low">"hmm"</option>
-                <option value="moderate">"I should avoid that next time"</option>
+                <option value="moderate"
+                  >"I should avoid that next time"</option
+                >
                 <option value="high">"Oh Shit!"</option>
               </select>
             </div>
@@ -468,10 +470,10 @@ img {
   #map {
     height: 57.3vh;
     width: auto;
-    flex:auto;
-    overflow-y: hidden
+    flex: auto;
+    overflow-y: hidden;
   }
-   
+
   /* .pothole-form {
     height: 60vh;
   } */
