@@ -4,9 +4,7 @@
       <header class="major-footer last">
         <h2>Subscribe to our mailing list</h2>
         <p>
-          Vitae natoque dictum etiam semper magnis enim feugiat amet curabitur
-          tempor orci penatibus. Tellus erat mauris ipsum fermentum etiam
-          vivamus.
+          Interested in learning more about our project. Subscribe to our mailing list to get updates on our project as we work hard to get those potholes patched. 
         </p>
       </header>
     </div>
@@ -113,6 +111,14 @@ form input {
 form input::placeholder {
   color: hsla(0, 0%, 100%, 0.5);
 }
+ul.actions {
+    all: unset;
+  display: flex;
+}
+ul.actions.special {
+
+  justify-content: center;
+}
 .button {
   all: unset;
   margin-top: 2.4em;
@@ -125,6 +131,8 @@ form input::placeholder {
   font-weight: 700;
   position: relative;
   transition: all 300ms ease;
+  justify-content: center;
+
 }
 li {
   list-style: none;

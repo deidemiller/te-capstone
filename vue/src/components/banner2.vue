@@ -1,12 +1,11 @@
 <template>
   <div class="major container">
-    <h3>Get shady with science</h3>
+    <h3>Expand our program</h3>
     <p>
-      Vitae natoque dictum etiam semper magnis enim feugiat amet curabitur
-      tempor orci penatibus. Tellus erat mauris ipsum fermentum etiam vivamus.
+      We're always looking to better serve Central Ohio. If you're a city administrator looking to bring our program to your city. Reach out to us here.
     </p>
     <ul class="actions special">
-      <li><a href="#" class="button">Join our crew</a></li>
+      <li><a href="#" class="button">Get in Touch</a></li>
     </ul>
   </div>
 </template>
@@ -30,9 +29,11 @@ p {
   font-size: 1em;
 }
 ul.actions {
+    all: unset;
   display: flex;
 }
 ul.actions.special {
+
   justify-content: center;
 }
 li {

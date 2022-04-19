@@ -2,11 +2,9 @@
   <div class="step-container">
     <div class="img-left"><img src="../assets/images/map.png" alt="" /></div>
     <div class="content content-right">
-      <h3>Check pothole</h3>
+      <h3>Check potholes</h3>
       <p>
-        Vitae natoque dictum etiam semper magnis enim feugiat amet curabitur
-        tempor orci penatibus. Tellus erat mauris ipsum fermentum etiam vivamus
-        eget. Nunc nibh morbi quis fusce lacus.
+        Easy and accessible pothole reporting and visualization with the public map feature.
       </p>
       <router-link
         tag="button"
@@ -17,11 +15,9 @@
     </div>
 
     <div class="content content-left">
-      <h3>Fix pothole</h3>
+      <h3>Fix potholes</h3>
       <p>
-        Vitae natoque dictum etiam semper magnis enim feugiat amet curabitur
-        tempor orci penatibus. Tellus erat mauris ipsum fermentum etiam vivamus
-        eget. Nunc nibh morbi quis fusce lacus.
+        Built-in project management for municipal administrators to easily schedule and dispatch repair crews.
       </p>
       <router-link tag="button" to="/dashboard" class="head_button"
         ><button class="button-59" role="button">View</button></router-link
