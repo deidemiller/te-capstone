@@ -1,55 +1,76 @@
 <template>
   <div>
     <div class="schedule">
-      <table>
-        <thead>
-          <tr>
-            <th>Pothole#</th>
-            <th>Employee Profile</th>
-            <th>Employee Name</th>
-            <th>Schedule Date</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>1</td>
-            <td><img src="../assets/images/e1.jpg" alt="" /></td>
-            <td>John Doe</td>
-            <td>2020-04-18</td>
-            <td>
-              <button class="button-35" role="button">Print Report</button>
-            </td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td><img src="../assets/images/e2.jpg" alt="" /></td>
-            <td>John Doe</td>
-            <td>2020-04-18</td>
-            <td>
-              <button class="button-35" role="button">Print Report</button>
-            </td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td><img src="../assets/images/e3.jpg" alt="" /></td>
-            <td>John Doe</td>
-            <td>2020-04-18</td>
-            <td>
-              <button class="button-35" role="button">Print Report</button>
-            </td>
-          </tr>
-          <tr>
-            <td>4</td>
-            <td><img src="../assets/images/e4.jpg" alt="" /></td>
-            <td>John Doe</td>
-            <td>2020-04-18</td>
-            <td>
-              <button class="button-35" role="button">Print Report</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="employee">
+        <table>
+          <thead>
+            <tr>
+              <th>Employee#</th>
+              <th>Employee Profile</th>
+              <th>Employee Name</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td><img src="../assets/images/e1.jpg" alt="" /></td>
+              <td>John Doe</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td><img src="../assets/images/e2.jpg" alt="" /></td>
+              <td>John Doe</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td><img src="../assets/images/e3.jpg" alt="" /></td>
+              <td>John Doe</td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td><img src="../assets/images/e4.jpg" alt="" /></td>
+              <td>John Doe</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="pothole">
+        <table>
+          <thead>
+            <tr>
+              <th>Pothole#</th>
+              <th>Reported Date</th>
+              <th>Schedule Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>2022-04-22</td>
+              <td>2022-05-01</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>2022-04-22</td>
+              <td>2022-05-01</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>2022-04-22</td>
+              <td>2022-05-01</td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td colspan="3">
+                <button class="button-35" role="button" type="submit">
+                  Print Report
+                </button>
+              </td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
     </div>
   </div>
 </template>
@@ -66,12 +87,18 @@ export default {
   margin-top: 10vh;
   min-height: 90vh;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   text-align: center;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.19);
+}
+.employee {
+  width: 50%;
   overflow-y: scroll;
 }
-
+.pothole {
+  width: 50%;
+  overflow-y: scroll;
+}
 thead th {
   position: sticky;
 }
@@ -83,6 +110,7 @@ td img {
 table {
   padding: 1.5em;
   border-collapse: collapse;
+  width: 100%;
 }
 thead {
   color: #999;
