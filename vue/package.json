@@ -17,6 +17,7 @@
     "bootstrap-vue": "^2.21.2",
     "core-js": "^3.9.1",
     "leaflet": "^1.7.1",
+    "v-calendar": "^2.4.1",
     "vue": "^2.6.12",
     "vue-router": "^3.5.1",
     "vue2-leaflet": "^2.7.1",
