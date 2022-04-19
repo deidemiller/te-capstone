@@ -97,7 +97,7 @@ export default {
 #login {
   width: 100%;
   height: 100vh;
-  background-color: #83acf1;
+  background-color: #cddfe3;
   position: relative;
 }
 .container {
@@ -107,7 +107,7 @@ export default {
   left: 50%;
   transform: translate(-50%, -50%);
   border-radius: 25px;
-  background-color: rgba(255, 255, 255, 0.354);
+  background-color: rgba(0, 0, 0, 0.05);
 }
 .header {
   text-align: center;
