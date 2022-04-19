@@ -22,6 +22,24 @@ public class Pothole {
     private boolean isInspected;
     private boolean showStatus;
     private int employeeId;
+    private String employeeFirstName;
+    private String employeeLastName;
+
+    public String getEmployeeFirstName() {
+        return employeeFirstName;
+    }
+
+    public void setEmployeeFirstName(String employeeFirstName) {
+        this.employeeFirstName = employeeFirstName;
+    }
+
+    public String getEmployeeLastName() {
+        return employeeLastName;
+    }
+
+    public void setEmployeeLastName(String employeeLastName) {
+        this.employeeLastName = employeeLastName;
+    }
 
     public int getEmployeeId() {
         return employeeId;

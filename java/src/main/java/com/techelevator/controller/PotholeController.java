@@ -28,8 +28,13 @@ public class PotholeController {
     }
 
     @RequestMapping(path = "/potholes/delete/{id}", method = RequestMethod.DELETE)
-    public void deletePothole(@PathVariable Integer id) {
+    public void deletePothole(@PathVariable int id) {
         potholeDao.deletePothole(id);
+    }
+
+    @RequestMapping(path = "/potholes/employee/{employeeId}", method = RequestMethod.GET)
+    public List<Pothole> getPotholesByEmployeeId(@PathVariable int employeeId) {
+        return potholeDao.getPotholesByEmployeeId(employeeId);
     }
 
     @RequestMapping(path = "/potholes/status/update", method = RequestMethod.PUT)
@@ -102,6 +107,10 @@ public class PotholeController {
     @RequestMapping(path = "/potholes/update/repair_date", method = RequestMethod.PUT)
     public void updateRepairDate(@RequestBody Pothole pothole) {
         potholeDao.updatePotholeRepairDate(pothole);
+    }
+    @RequestMapping(path = "/potholes/scheduled/employee", method = RequestMethod.GET)
+    public List<Pothole> getScheduledPotholesWithEmployeeInfo() {
+        return potholeDao.getScheduledPotholesWithEmployeeInfo();
     }
 
 

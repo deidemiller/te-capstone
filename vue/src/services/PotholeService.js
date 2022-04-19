@@ -1,3 +1,4 @@
+
 import axios from "axios";
 const http = axios.create({
   baseURL: "http://localhost:8080",
@@ -57,6 +58,12 @@ export default {
   },
   updateRepairDate(pothole) {
     return http.put('/potholes/update/repair_date', pothole)
+  },
+  getPotholesByEmployeeId(id) {
+    return http.get('/potholes/employee/'+id)
+  },
+  getScheduledPotholesWithEmployeeInfo() {
+    return http.get('/potholes/scheduled/employee')
   }
 
 };

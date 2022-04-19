@@ -5,32 +5,26 @@
         <table>
           <thead>
             <tr>
-              <th>Employee#</th>
+              <th>Employee Title</th>
               <th>Employee Profile</th>
               <th>Employee Name</th>
+              <th>View Assigned Potholes</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td>1</td>
+              <td colspan="4">
+                <button class="button-35" role="button" v-on:click = "getAllScheduledPotholes()">
+                  Reset Filter
+                </button>
+              </td>
+            <tr v-for="employee in employees" v-bind:key="employee.employeeId">
+              <td>{{employee.title}}</td>
               <td><img src="../assets/images/e1.jpg" alt="" /></td>
-              <td>John Doe</td>
+              <td>{{employee.firstName}} {{employee.lastName}}</td>
+              <button class="button-35" role="button" v-on:click = "getPotholesForEmployee(employee.employeeId)">View Assigned</button>
             </tr>
-            <tr>
-              <td>2</td>
-              <td><img src="../assets/images/e2.jpg" alt="" /></td>
-              <td>John Doe</td>
-            </tr>
-            <tr>
-              <td>3</td>
-              <td><img src="../assets/images/e3.jpg" alt="" /></td>
-              <td>John Doe</td>
-            </tr>
-            <tr>
-              <td>4</td>
-              <td><img src="../assets/images/e4.jpg" alt="" /></td>
-              <td>John Doe</td>
-            </tr>
+            
           </tbody>
         </table>
       </div>
@@ -41,28 +35,20 @@
               <th>Pothole#</th>
               <th>Reported Date</th>
               <th>Schedule Date</th>
+              <th>Severity</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>1</td>
-              <td>2022-04-22</td>
-              <td>2022-05-01</td>
-            </tr>
-            <tr>
-              <td>2</td>
-              <td>2022-04-22</td>
-              <td>2022-05-01</td>
-            </tr>
-            <tr>
-              <td>3</td>
-              <td>2022-04-22</td>
-              <td>2022-05-01</td>
+            <tr v-for="pothole in potholes" v-bind:key="pothole.potholeId">
+              <td>{{ pothole.potholeId }}</td>
+              <td>{{ pothole.dateReported }}</td>
+              <td>{{ pothole.repairDate }}</td>
+              <td>{{ pothole.severity }}</td>
             </tr>
           </tbody>
           <tfoot>
             <tr>
-              <td colspan="3">
+              <td colspan="4">
                 <button class="button-35" role="button" type="submit">
                   Print Report
                 </button>
@@ -76,8 +62,37 @@
 </template>
 
 <script>
+import EmployeeService from "../services/EmployeeService";
+import PotholeService from "../services/PotholeService";
 export default {
   name: "dashboard-schedule",
+  data() {
+    return {
+      employees : [],
+      potholes : []
+    }
+  },
+  methods: {
+    getEmployees() {
+      EmployeeService.listEmployees().then((response) => {
+        this.employees = response.data;
+      });
+    },
+    getPotholesForEmployee(id) {
+      PotholeService.getPotholesByEmployeeId(id).then(response => {
+        this.potholes = response.data;
+      });
+    },
+    getAllScheduledPotholes() {
+      PotholeService.getScheduledPotholesWithEmployeeInfo().then(response => {
+        this.potholes = response.data;
+      })
+    }
+  },
+  created() {
+    this.getEmployees();
+    this.getAllScheduledPotholes();
+  }
 };
 </script>
 
