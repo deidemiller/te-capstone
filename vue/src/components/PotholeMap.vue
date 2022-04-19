@@ -450,4 +450,35 @@ img {
   letter-spacing: 0.125em;
   background-color: #42484d51;
 }
+@media screen and (max-width: 426px) {
+  #container {
+    flex-direction: column-reverse;
+    flex-flow: column-reverse;
+    flex-wrap: wrap;
+    overflow: auto;
+  }
+  .sideBar {
+    display: flex;
+    flex-direction: column-reverse;
+    flex-shrink: inherit;
+    height: 41vh;
+    width: auto;
+  }
+  #map {
+    height: 57.3vh;
+    width: auto;
+    flex:auto;
+    overflow-y: hidden
+  }
+   
+  /* .pothole-form {
+    height: 60vh;
+  } */
+  .pothole-list {
+    display: none;
+  }
+  h3 {
+    padding-top: 1rem;
+  }
+}
 </style>

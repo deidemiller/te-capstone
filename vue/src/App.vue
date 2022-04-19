@@ -19,4 +19,11 @@ html {
 body {
   margin: 0;
 }
+@media screen and (max-width: 426px){
+  
+  #nav {
+    height: 0px
+  }
+  
+}
 </style>
