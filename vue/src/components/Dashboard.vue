@@ -20,10 +20,10 @@
             icon="fa-solid fa-list-check"
           />Review</router-link
         >
-        <router-link tag="li" to="/dashboard/sechdule"
+        <router-link tag="li" to="/dashboard/schedule"
           ><font-awesome-icon
             icon="fa-solid fa-calendar-days"
-          />Sechdule</router-link
+          />Schedule</router-link
         >
       </ul>
     </div>
@@ -164,6 +164,7 @@ h3 {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  
 }
 .side-menu .brand-logo {
   display: flex;

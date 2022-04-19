@@ -7,7 +7,7 @@
       <h3 v-if="!showForm">Click on the Map to Report a Pothole</h3>
       <div>
         <div class="pending-button">
-          <h4>Show Pending Potholes:</h4>
+          <h4>Show Pending Reports:</h4>
           <input type="checkbox" v-on:click="toggleShowPending()" />
         </div>
         <form
@@ -42,9 +42,9 @@
                 id="severity"
                 v-model="newPothole.severity"
               >
-                <option value="low">Low</option>
-                <option value="moderate">Moderate</option>
-                <option value="high">High</option>
+                <option value="low">"hmm"</option>
+                <option value="moderate">"I should avoid that next time"</option>
+                <option value="high">"Oh Shit!"</option>
               </select>
             </div>
             <div>
@@ -84,7 +84,8 @@
         v-for="pothole in potholes"
         v-bind:key="pothole.potholeId"
       >
-        <h1>🔍Nearest Intersection:</h1>
+        <h1>Nearest Intersection:</h1>
+        <!--<h1>🔍Nearest Intersection:</h1>-->
         <h1>{{ pothole.crossStreet1 }} & {{ pothole.crossStreet2 }}</h1>
       </div>
     </div>
