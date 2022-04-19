@@ -43,7 +43,9 @@
                 v-model="newPothole.severity"
               >
                 <option value="low">"hmm"</option>
-                <option value="moderate">"I should avoid that next time"</option>
+                <option value="moderate">
+                  "I should avoid that next time"
+                </option>
                 <option value="high">"Oh Shit!"</option>
               </select>
             </div>
@@ -452,26 +454,30 @@ img {
   background-color: #42484d51;
 }
 @media screen and (max-width: 426px) {
+  img {
+    width: 10em;
+  }
   #container {
-    flex-direction: column-reverse;
-    flex-flow: column-reverse;
+    flex-direction: column;
+    flex-flow: column;
     flex-wrap: wrap;
     overflow: auto;
   }
   .sideBar {
-    display: flex;
-    flex-direction: column-reverse;
+    display: flexbox;
+    flex-direction: column;
     flex-shrink: inherit;
     height: 41vh;
     width: auto;
+    padding: 0.5em;
   }
   #map {
     height: 57.3vh;
     width: auto;
-    flex:auto;
-    overflow-y: hidden
+    flex: auto;
+    overflow-y: hidden;
   }
-   
+
   /* .pothole-form {
     height: 60vh;
   } */
