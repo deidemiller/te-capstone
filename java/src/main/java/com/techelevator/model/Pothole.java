@@ -21,6 +21,15 @@ public class Pothole {
     private LocalDate repairDate;
     private boolean isInspected;
     private boolean showStatus;
+    private int employeeId;
+
+    public int getEmployeeId() {
+        return employeeId;
+    }
+
+    public void setEmployeeId(int employee_id) {
+        this.employeeId = employee_id;
+    }
 
     public boolean isShowStatus() {
         return showStatus;
