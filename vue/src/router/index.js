@@ -82,7 +82,7 @@ const router = new Router({
           component: DashReview,
         },
         {
-          path: "sechdule",
+          path: "schedule",
           component: DashSchedule,
         },
       ],
