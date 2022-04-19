@@ -229,6 +229,38 @@ public class JdbcPotholeDao  implements PotholeDao{
         jdbcTemplate.update(sql, pothole.getRepairDate(), pothole.getEmployeeId(), pothole.getPotholeId());
     }
 
+    @Override
+    public List<Pothole> getPotholesByEmployeeId(int employeeId) {
+        List<Pothole> potholes = new ArrayList<>();
+        String sql = "SELECT * FROM pothole JOIN employee ON pothole.employee_id = employee.employee_id WHERE employee.employee_id = ? AND repair_status = 'scheduled' ORDER BY repair_date ASC;";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, employeeId);
+        while (results.next()) {
+            Pothole pothole = mapRowToPothole(results);
+            pothole.setEmployeeFirstName(results.getString("first_name"));
+            pothole.setEmployeeLastName(results.getString("last_name"));
+            pothole.setEmployeeId(results.getInt("employee_id"));
+            potholes.add(pothole);
+
+        }
+        return potholes;
+    }
+
+    @Override
+    public List<Pothole> getScheduledPotholesWithEmployeeInfo() {
+        List<Pothole> potholes = new ArrayList<>();
+        String sql = "SELECT * FROM pothole JOIN employee ON pothole.employee_id = employee.employee_id WHERE repair_status = 'scheduled' ORDER BY repair_date ASC;";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
+        while (results.next()) {
+            Pothole pothole = mapRowToPothole(results);
+            pothole.setEmployeeFirstName(results.getString("first_name"));
+            pothole.setEmployeeLastName(results.getString("last_name"));
+            pothole.setEmployeeId(results.getInt("employee_id"));
+            potholes.add(pothole);
+
+        }
+        return potholes;
+    }
+
     private Pothole mapRowToPothole(SqlRowSet results) {
         Pothole pothole = new Pothole();
         pothole.setPotholeId(results.getInt("pothole_id"));

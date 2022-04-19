@@ -23,5 +23,6 @@ public interface PotholeDao {
     void showDetails(Pothole pothole);
     List<Pothole> getAllReportedPotholes();
     void updatePotholeRepairDate(Pothole pothole);
-
+    List<Pothole> getPotholesByEmployeeId(int employeeId);
+    List<Pothole> getScheduledPotholesWithEmployeeInfo();
 }
