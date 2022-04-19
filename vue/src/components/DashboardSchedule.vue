@@ -12,18 +12,23 @@
             </tr>
           </thead>
           <tbody>
+            
+            <tr v-for="employee in employees" v-bind:key="employee.employeeId">
+              <td>{{employee.title}}</td>
+              <td><img src="../assets/images/e1.jpg" alt="" /></td>
+              <td>{{employee.firstName}} {{employee.lastName}}</td>
+              <button class="button-35" role="button" v-on:click = "toggleDetails(employee.employeeId)">
+                View Assigned
+                </button>
+            </tr>
             <tr>
               <td colspan="4">
                 <button class="button-35" role="button" v-on:click = "getAllScheduledPotholes()">
                   Reset Filter
                 </button>
               </td>
-            <tr v-for="employee in employees" v-bind:key="employee.employeeId">
-              <td>{{employee.title}}</td>
-              <td><img src="../assets/images/e1.jpg" alt="" /></td>
-              <td>{{employee.firstName}} {{employee.lastName}}</td>
-              <button class="button-35" role="button" v-on:click = "getPotholesForEmployee(employee.employeeId)">View Assigned</button>
-            </tr>
+              
+              </tr>
             
           </tbody>
         </table>
@@ -32,7 +37,7 @@
         <table>
           <thead>
             <tr>
-              <th>Pothole#</th>
+              <th>Employee Assigned</th>
               <th>Reported Date</th>
               <th>Schedule Date</th>
               <th>Severity</th>
@@ -40,7 +45,7 @@
           </thead>
           <tbody>
             <tr v-for="pothole in potholes" v-bind:key="pothole.potholeId">
-              <td>{{ pothole.potholeId }}</td>
+              <td>{{ pothole.employeeFirstName }} {{pothole.employeeLastName}}</td>
               <td>{{ pothole.dateReported }}</td>
               <td>{{ pothole.repairDate }}</td>
               <td>{{ pothole.severity }}</td>
@@ -66,6 +71,7 @@ import EmployeeService from "../services/EmployeeService";
 import PotholeService from "../services/PotholeService";
 export default {
   name: "dashboard-schedule",
+  showAssigned: false,
   data() {
     return {
       employees : [],
@@ -78,14 +84,21 @@ export default {
         this.employees = response.data;
       });
     },
-    getPotholesForEmployee(id) {
-      PotholeService.getPotholesByEmployeeId(id).then(response => {
+    toggleDetails(id) {
+      if (this.showAssigned === false) {
+        PotholeService.getPotholesByEmployeeId(id).then(response => {
         this.potholes = response.data;
+        this.showAssigned = true;
       });
+      } else {
+        this.getAllScheduledPotholes();
+        }
+      
     },
     getAllScheduledPotholes() {
       PotholeService.getScheduledPotholesWithEmployeeInfo().then(response => {
         this.potholes = response.data;
+        this.showAssigned = false;
       })
     }
   },
