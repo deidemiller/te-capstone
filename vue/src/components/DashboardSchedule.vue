@@ -65,7 +65,7 @@
           </tbody>
           <tfoot>
             <tr>
-              <td colspan="4">
+              <td colspan="5">
                 <button class="button-35" role="button" type="submit">
                   Print Report
                 </button>
@@ -115,7 +115,7 @@ export default {
           this.getAllScheduledPotholes();
           this.employeeID = 0;
         } else {
-          PotholeService.getPotholesByEmployeeId(id).then(response => {
+          PotholeService.getPotholesByEmployeeId(id).then((response) => {
             this.potholes = response.data;
             this.showAssigned = true;
           });
@@ -154,6 +154,11 @@ export default {
 .pothole {
   width: 50%;
   overflow-y: scroll;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.19);
+}
+.employee,
+.pothole {
+  margin: 1em;
 }
 thead th {
   position: sticky;
@@ -176,7 +181,7 @@ thead {
 th,
 td {
   padding: 1em;
-  font-size: 1.2em;
+  font-size: 1.05em;
   font-weight: 700;
 }
 tr:nth-child(even) {
@@ -196,7 +201,7 @@ tr:nth-child(odd) {
   display: inline-flex;
   flex: 1 1 auto;
   font-family: Inter, sans-serif;
-  font-size: 1.2rem;
+  font-size: 0.8rem;
   font-weight: 700;
   justify-content: center;
   line-height: 1;
