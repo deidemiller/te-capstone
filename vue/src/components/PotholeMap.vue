@@ -156,7 +156,13 @@
               </div>
             </div>
             <div class="buttons">
-              <button class="button-80" type="submit">Save</button>
+              <button
+                class="button-80"
+                type="submit"
+                v-on:click="showAlert = true"
+              >
+                Save
+              </button>
               <button class="button-80" v-on:click.prevent="clearForm">
                 Cancel
               </button>
@@ -174,6 +180,15 @@
         </div>
       </div>
       <div id="map">
+        <div class="alert" v-if="showAlert">
+          <h6>
+            This has been successfully added! Thank you for helping make our
+            roads safer!
+          </h6>
+          <button class="close" v-on:click="showAlert = false">
+            <font-awesome-icon icon="fa-solid fa-xmark" />
+          </button>
+        </div>
         <l-map
           v-on:click="onMapClick"
           style="width: 100%"
@@ -233,6 +248,7 @@ export default {
         longitude: "",
         imageUrl: "",
       },
+      showAlert: false,
       potholes: [],
       showForm: false,
       showPending: false,
@@ -285,9 +301,9 @@ export default {
             this.getReportedPotholes();
           }
 
-          alert(
-            "This has been successfully added! Thank you for helping make our roads safer!"
-          );
+          // alert(
+          //   "This has been successfully added! Thank you for helping make our roads safer!"
+          // );
           this.newPothole = {
             pending: true,
             repairStatus: "unscheduled",
@@ -318,6 +334,24 @@ export default {
 </script>
 
 <style scoped>
+.alert {
+  background-color: #f55353;
+  height: 3%;
+  display: flex;
+  justify-content: space-between;
+}
+.close {
+  border: none;
+  background-color: #f55353;
+  cursor: pointer;
+}
+h6 {
+  margin: 0;
+  font-size: 1em;
+  text-align: center;
+  padding-top: 0.5em;
+  padding-left: 2em;
+}
 .pothole-form {
   border-radius: 5px;
   padding: 2.5em 7.25em 2.5em 4em;

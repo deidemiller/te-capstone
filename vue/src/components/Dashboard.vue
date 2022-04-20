@@ -36,7 +36,7 @@
           </div>
           <div class="user">
             <div class="welcome">
-              <h4>Welcome back, {{$store.state.user.username}}</h4>
+              <h4>Welcome back, {{ $store.state.user.username }}</h4>
             </div>
             <div class="notification">
               <div><font-awesome-icon icon="fa-solid fa-bell" /></div>
@@ -47,6 +47,12 @@
             </div>
           </div>
         </div>
+        <router-link
+          v-bind:to="{ name: 'logout' }"
+          v-if="$store.state.token != ''"
+          class="logOut"
+          >Logout</router-link
+        >
       </div>
       <router-view />
     </div>
@@ -164,7 +170,6 @@ h3 {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  
 }
 .side-menu .brand-logo {
   display: flex;
@@ -259,5 +264,14 @@ ul {
 li.router-link-exact-active {
   background-color: #22577e;
   color: white;
+}
+.logOut {
+  text-decoration: none;
+  color: black;
+  cursor: pointer;
+  font-weight: 700;
+}
+.logOut:hover {
+  background-color: red;
 }
 </style>

@@ -2,11 +2,11 @@
   <div id="app">
     <div id="nav">
       <!-- <router-link v-bind:to="{ name: 'home' }">Home</router-link>&nbsp;|&nbsp; -->
-      <router-link
+      <!-- <router-link
         v-bind:to="{ name: 'logout' }"
         v-if="$store.state.token != ''"
         >Logout</router-link
-      >
+      > -->
     </div>
     <router-view />
   </div>
@@ -19,11 +19,9 @@ html {
 body {
   margin: 0;
 }
-@media screen and (max-width: 426px){
-  
+@media screen and (max-width: 426px) {
   #nav {
-    height: 0px
+    height: 0px;
   }
-  
 }
 </style>

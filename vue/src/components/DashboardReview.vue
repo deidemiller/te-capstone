@@ -1,6 +1,22 @@
 <template>
   <div>
     <div class="review">
+      <div class="alert" v-if="showAlert">
+        <h6>
+          This pothole has been scheduled for repair.
+        </h6>
+        <button class="close" v-on:click="showAlert = false">
+          <font-awesome-icon icon="fa-solid fa-xmark" />
+        </button>
+      </div>
+      <div class="alert" v-if="showMark">
+        <h6>
+          This pothole has been marked repaired.
+        </h6>
+        <button class="close" v-on:click="showMark = false">
+          <font-awesome-icon icon="fa-solid fa-xmark" />
+        </button>
+      </div>
       <div class="filter">
         <div class="status-button">
           <h4>Unscheduled</h4>
@@ -52,13 +68,16 @@
                     </div> -->
                     <div class="employee">
                       <label for="severity">Employee</label>
-                      <select name="employee" id="employee" v-model="selectedEmployee" >
+                      <select
+                        name="employee"
+                        id="employee"
+                        v-model="selectedEmployee"
+                      >
                         <option
-                          
                           v-for="employee in employees"
                           v-bind:value="employee.employeeId"
                           v-bind:key="employee.employeeId"
-                          >
+                        >
                           {{ employee.firstName }} {{ employee.lastName }}
                         </option>
                       </select>
@@ -222,6 +241,8 @@ export default {
         imageUrl: "",
         showDetails: "",
       },
+      showAlert: false,
+      showMark: false,
       potholes: [],
       showS: false,
       lat: "",
@@ -417,12 +438,13 @@ export default {
           PotholeService.updateRepairStatus(potholeToSchedule).then(
             (response) => {
               if (response.status === 200) {
-                alert("This pothole has been scheduled for repair.");
+                console.log("Success!");
               }
             }
           );
         }
       });
+      this.showAlert = true;
       this.showS = false;
       this.details = false;
     },
@@ -436,13 +458,13 @@ export default {
       }
       PotholeService.repairedPothole(potholeToRepair).then((response) => {
         if (response.status === 200) {
-          alert("This pothole has been marked repaired.");
+          console.log("Success!");
         }
       });
+      this.showMark = true;
       this.details = false;
       potholeToRepair.repairStatus = "completed";
     },
-    
   },
   created() {
     this.getPotholes();
@@ -814,5 +836,23 @@ section {
 .button-28:active {
   box-shadow: none;
   transform: translateY(0);
+}
+.alert {
+  background-color: #f55353;
+  height: 3%;
+  display: flex;
+  justify-content: space-between;
+}
+.close {
+  border: none;
+  background-color: #f55353;
+  cursor: pointer;
+}
+h6 {
+  margin: 0;
+  font-size: 1em;
+  text-align: center;
+  padding-top: 0.5em;
+  padding-left: 2em;
 }
 </style>

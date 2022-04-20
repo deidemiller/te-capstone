@@ -17,6 +17,7 @@ import { faThumbsUp } from "@fortawesome/free-solid-svg-icons";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { faLock } from "@fortawesome/free-solid-svg-icons";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
 library.add(faHouse);
@@ -31,6 +32,7 @@ library.add(faThumbsUp);
 library.add(faUser);
 library.add(faLock);
 library.add(faChevronRight);
+library.add(faXmark);
 
 Vue.component("font-awesome-icon", FontAwesomeIcon);
 Vue.config.productionTip = false;
