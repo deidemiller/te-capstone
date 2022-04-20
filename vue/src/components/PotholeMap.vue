@@ -1,15 +1,11 @@
 <template>
-  <div id="container">
-    <div class="sideBar">
-      <div class="logo">
-        <img src="../assets/images/pothole_tracker_logo.png" alt="Logo" />
+  <div class="map">
+    <div class="top-bar">
+      <div class="logo-top">
+        <img src="../assets/images/pothole_tracker_logo.png" alt="" />
       </div>
-      <h3 v-if="!showForm">Click on the Map to Report a Pothole</h3>
-      <div>
-        <div class="pending-button">
-          <h4>Show Pending Reports:</h4>
-          <input type="checkbox" v-on:click="toggleShowPending()" />
-        </div>
+      <div class="top-form">
+        <h5 v-if="!showForm">Click on the Map to Report a Pothole</h5>
         <form
           class="pothole-form"
           v-on:submit.prevent="submitForm"
@@ -82,44 +78,130 @@
           </div>
         </form>
       </div>
-      <div
-        class="pothole-list"
-        v-for="pothole in potholes"
-        v-bind:key="pothole.potholeId"
-      >
-        <h1>Nearest Intersection:</h1>
-        <!--<h1>🔍Nearest Intersection:</h1>-->
-        <h1>{{ pothole.crossStreet1 }} & {{ pothole.crossStreet2 }}</h1>
-      </div>
     </div>
-    <div id="map">
-      <l-map
-        v-on:click="onMapClick"
-        style="width: 100%"
-        :zoom="zoom"
-        :center="center"
-      >
-        <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
-        <l-marker
+
+    <div id="container">
+      <div class="sideBar">
+        <div class="logo">
+          <img src="../assets/images/pothole_tracker_logo.png" alt="Logo" />
+        </div>
+        <h3 v-if="!showForm">Click on the Map to Report a Pothole</h3>
+        <div>
+          <div class="pending-button">
+            <h4>Show Pending Reports:</h4>
+            <input type="checkbox" v-on:click="toggleShowPending()" />
+          </div>
+          <form
+            class="pothole-form"
+            v-on:submit.prevent="submitForm"
+            v-if="showForm"
+          >
+            <!-- v-show keeps it in the DOM, but adds display: none. This is ALWAYS a good idea for forms -->
+            <h2>Report Form</h2>
+            <div class="reportForm">
+              <div>
+                <input
+                  id="crossStreet1"
+                  type="text"
+                  v-model="newPothole.crossStreet1"
+                  placeholder="Street:"
+                />
+                <label for="crossStreet1">Street:</label>
+                <input
+                  id="crossStreet2"
+                  type="text"
+                  v-model="newPothole.crossStreet2"
+                  placeholder="Nearest Cross Street:"
+                />
+                <label for="crossStreet2">Nearest Cross Street:</label>
+              </div>
+              <div class="severity">
+                <h1>Choose Severity:</h1>
+                <label for="severity">Choose Severity:</label>
+                <select
+                  name="severity"
+                  id="severity"
+                  v-model="newPothole.severity"
+                >
+                  <option value="low">"hmm"</option>
+                  <option value="moderate">
+                    "I should avoid that next time"
+                  </option>
+
+                  <option value="high">"Oh Shit!"</option>
+                </select>
+              </div>
+              <div>
+                <input
+                  type="text"
+                  id="contactName"
+                  v-model="newPothole.contactName"
+                  placeholder="Contact Name:"
+                />
+                <label for="contactName">Contact Name:</label>
+                <input
+                  id="contactEmail"
+                  type="email"
+                  v-model="newPothole.contactEmail"
+                  placeholder="Contact Email:"
+                />
+                <label for="contactEmail">Contact Email:</label>
+                <input
+                  type="text"
+                  id="contactPhone"
+                  v-model="newPothole.contactPhone"
+                  placeholder="Contact Phone:"
+                />
+                <label for="contactPhone">Contact Phone:</label>
+              </div>
+            </div>
+            <div class="buttons">
+              <button class="button-80" type="submit">Save</button>
+              <button class="button-80" v-on:click.prevent="clearForm">
+                Cancel
+              </button>
+            </div>
+          </form>
+        </div>
+        <div
+          class="pothole-list"
           v-for="pothole in potholes"
           v-bind:key="pothole.potholeId"
-          :lat-lng="[pothole.latitude, pothole.longitude]"
-          ><lIcon
-            icon-url="https://i.postimg.cc/rmwdTRPL/imageedit-1-9960213275.png"
-            :icon-size="[40, 40]"
-          ></lIcon
-          ><l-popup class="popup"
-            >Reported on:<br />
-            {{ pothole.dateReported }}</l-popup
-          >
-        </l-marker>
-        <l-marker :lat-lng="[lat, lng]" v-if="showForm"
-          ><lIcon
-            icon-url="https://i.postimg.cc/rmwdTRPL/imageedit-1-9960213275.png"
-            :icon-size="[40, 40]"
-          ></lIcon
-        ></l-marker>
-      </l-map>
+        >
+          <h1>Nearest Intersection:</h1>
+          <!--<h1>🔍Nearest Intersection:</h1>-->
+          <h1>{{ pothole.crossStreet1 }} & {{ pothole.crossStreet2 }}</h1>
+        </div>
+      </div>
+      <div id="map">
+        <l-map
+          v-on:click="onMapClick"
+          style="width: 100%"
+          :zoom="zoom"
+          :center="center"
+        >
+          <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
+          <l-marker
+            v-for="pothole in potholes"
+            v-bind:key="pothole.potholeId"
+            :lat-lng="[pothole.latitude, pothole.longitude]"
+            ><lIcon
+              icon-url="https://i.postimg.cc/rmwdTRPL/imageedit-1-9960213275.png"
+              :icon-size="[40, 40]"
+            ></lIcon
+            ><l-popup class="popup"
+              >Reported on:<br />
+              {{ pothole.dateReported }}</l-popup
+            >
+          </l-marker>
+          <l-marker :lat-lng="[lat, lng]" v-if="showForm"
+            ><lIcon
+              icon-url="https://i.postimg.cc/rmwdTRPL/imageedit-1-9960213275.png"
+              :icon-size="[40, 40]"
+            ></lIcon
+          ></l-marker>
+        </l-map>
+      </div>
     </div>
   </div>
 </template>
@@ -433,7 +515,9 @@ input:checked[type="checkbox"]:before {
   overflow-x: hidden;
   padding: 0.5em 1em 0.5em 1em;
 }
-
+h3 {
+  display: none;
+}
 .logo {
   margin: 0 auto;
   width: 10em;
@@ -454,9 +538,12 @@ img {
   letter-spacing: 0.125em;
   background-color: #42484d51;
 }
+.top-bar {
+  display: none;
+}
 @media screen and (max-width: 426px) {
   img {
-    width: 10em;
+    width: 5em;
   }
   #container {
     flex-direction: column;
@@ -464,29 +551,46 @@ img {
     flex-wrap: wrap;
     overflow: auto;
   }
+
   .sideBar {
-    display: flexbox;
-    flex-direction: column;
-    flex-shrink: inherit;
-    height: 41vh;
-    width: auto;
-    padding: 0.5em;
+    display: none;
   }
   #map {
     height: 57.3vh;
     width: auto;
     flex: auto;
     overflow-y: hidden;
+    z-index: 10;
+  }
+  .top-bar {
+    background-color: #cddfe3;
+    height: 10%;
+    display: block;
+  }
+  .logo-top {
+    width: 20%;
+    margin: 0 auto;
   }
 
-  /* .pothole-form {
-    height: 60vh;
-  } */
-  .pothole-list {
+  #map {
+    width: 100%;
+    height: 100vh;
+  }
+  .logo {
     display: none;
   }
-  h3 {
-    padding-top: 1rem;
+  h5 {
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    font-weight: 700;
+  }
+  .top-form form {
+    background-color: rgba(0, 0, 0, 0.05);
+    padding: 3em;
+  }
+  .pothole-form {
+    margin-bottom: 0;
   }
 }
 </style>
