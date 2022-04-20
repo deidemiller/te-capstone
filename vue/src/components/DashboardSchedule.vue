@@ -32,6 +32,7 @@
                   class="button-35"
                   role="button"
                   v-on:click="getAllScheduledPotholes()"
+                  v-if="showAssigned === true"
                 >
                   Reset Filter
                 </button>
@@ -46,7 +47,8 @@
             <tr>
               <th>Employee Assigned</th>
               <th>Reported Date</th>
-              <th>Schedule Date</th>
+              <th>Scheduled Repair Date</th>
+              <th>Location</th>
               <th>Severity</th>
             </tr>
           </thead>
@@ -57,6 +59,7 @@
               </td>
               <td>{{ pothole.dateReported }}</td>
               <td>{{ pothole.repairDate }}</td>
+              <td>{{ pothole.crossStreet1 }} & {{ pothole.crossStreet2 }}</td>
               <td>{{ pothole.severity }}</td>
             </tr>
           </tbody>
@@ -86,6 +89,7 @@ export default {
     return {
       employees: [],
       potholes: [],
+      employeeID: 0,
     };
   },
   methods: {
@@ -95,13 +99,28 @@ export default {
       });
     },
     toggleDetails(id) {
-      if (this.showAssigned === false) {
-        PotholeService.getPotholesByEmployeeId(id).then((response) => {
-          this.potholes = response.data;
-          this.showAssigned = true;
-        });
+      if (this.employeeID === 0) {
+        if (this.showAssigned === false) {
+          PotholeService.getPotholesByEmployeeId(id).then((response) => {
+            this.potholes = response.data;
+            this.showAssigned = true;
+            this.employeeID = id;
+          });
+        } else {
+          this.getAllScheduledPotholes();
+          this.employeeID = 0;
+        }
       } else {
-        this.getAllScheduledPotholes();
+        if (this.employeeID === id) {
+          this.getAllScheduledPotholes();
+          this.employeeID = 0;
+        } else {
+          PotholeService.getPotholesByEmployeeId(id).then(response => {
+            this.potholes = response.data;
+            this.showAssigned = true;
+          });
+          this.employeeID = id;
+        }
       }
     },
     getAllScheduledPotholes() {
