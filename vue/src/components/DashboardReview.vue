@@ -447,6 +447,7 @@ export default {
       this.showAlert = true;
       this.showS = false;
       this.details = false;
+      setTimeout(() => this.showAlert = false, 3000);
     },
     completePothole() {
       let potholeToRepair = {};
@@ -464,6 +465,7 @@ export default {
       this.showMark = true;
       this.details = false;
       potholeToRepair.repairStatus = "completed";
+      setTimeout(() => this.showMark = false, 3000);
     },
   },
   created() {
