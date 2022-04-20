@@ -447,6 +447,8 @@ export default {
       this.showAlert = true;
       this.showS = false;
       this.details = false;
+      this.dateForRepair = null;
+      this.selectedEmployee = 0;
       setTimeout(() => this.showAlert = false, 3000);
     },
     completePothole() {
