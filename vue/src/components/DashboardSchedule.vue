@@ -41,10 +41,10 @@
           </tbody>
         </table>
       </div>
-      <div class="pothole">
+      <div class="pothole" id="schedule">
         <table>
-          <thead>
-            <tr>
+          <thead id = "header">
+            <tr >
               <th>Employee Assigned</th>
               <th>Reported Date</th>
               <th>Scheduled Repair Date</th>
@@ -66,7 +66,9 @@
           <tfoot>
             <tr>
               <td colspan="5">
-                <button class="button-35" role="button" type="submit">
+
+                <button class="button-35" role="button" type="submit" v-on:click = "printSchedule()">
+
                   Print Report
                 </button>
               </td>
@@ -90,6 +92,7 @@ export default {
       employees: [],
       potholes: [],
       employeeID: 0,
+      showButton: true,
     };
   },
   methods: {
@@ -129,6 +132,38 @@ export default {
         this.showAssigned = false;
       });
     },
+    printSchedule() {
+      this.showButton = false;
+      const header = document.getElementById("header").innerHTML;
+      const tableBody = this.createScheduleRows();
+      const schedule = window.open("", "", "height=500, width=500");
+      schedule.document.write("<html>");
+      schedule.document.write("<body > <h1>Schedule<br>");
+      schedule.document.write("<table>");
+      schedule.document.write(header)
+      schedule.document.write("<tbody>")
+      schedule.document.write(tableBody)
+      schedule.document.write("</tbody>")
+      schedule.document.write("</table>")
+      schedule.document.write("</body></html>");
+      schedule.document.close();
+      schedule.print();
+      this.showButton = true;
+    },
+    createScheduleRows() {
+      let tableBody = ""; 
+      this.potholes.forEach(pothole => {
+        tableBody += "<tr>"
+        tableBody += `<td>${pothole.employeeFirstName} ${pothole.employeeLastName}</td>`;
+        tableBody += `<td>${pothole.dateReported}</td>`;
+        tableBody += `<td>${pothole.repairDate}</td>`;
+        tableBody += `<td>${pothole.crossStreet1} ${pothole.crossStreet2}</td>`;
+        tableBody += `<td>${pothole.severity}</td>`;
+        tableBody += "</tr>"
+      })
+      
+      return tableBody;
+    }
   },
   created() {
     this.getEmployees();
