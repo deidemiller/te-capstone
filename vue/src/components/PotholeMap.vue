@@ -134,7 +134,7 @@
                     "I should avoid that next time"
                   </option>
 
-                  <option value="high">"Oh Shit!"</option>
+                  <option value="high">"Oh @#&%!"</option>
                 </select>
               </div>
               <div>
