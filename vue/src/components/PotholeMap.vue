@@ -71,7 +71,13 @@
             </div>
           </div>
           <div class="buttons">
-            <button class="button-80" type="submit">Save</button>
+            <button
+              class="button-80"
+              type="submit"
+              v-on:click="showAlert = true"
+            >
+              Save
+            </button>
             <button class="button-80" v-on:click.prevent="clearForm">
               Cancel
             </button>
