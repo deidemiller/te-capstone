@@ -43,8 +43,8 @@
       </div>
       <div class="pothole" id="schedule">
         <table>
-          <thead id = "header">
-            <tr >
+          <thead id="header">
+            <tr>
               <th>Employee Assigned</th>
               <th>Reported Date</th>
               <th>Scheduled Repair Date</th>
@@ -66,9 +66,12 @@
           <tfoot>
             <tr>
               <td colspan="5">
-
-                <button class="button-35" role="button" type="submit" v-on:click = "printSchedule()">
-
+                <button
+                  class="button-35"
+                  role="button"
+                  type="submit"
+                  v-on:click="printSchedule()"
+                >
                   Print Report
                 </button>
               </td>
@@ -77,7 +80,6 @@
         </table>
       </div>
     </div>
-    <vue-event-calendar :events="demoEvents"></vue-event-calendar>
   </div>
 </template>
 
@@ -139,31 +141,40 @@ export default {
       const schedule = window.open("", "", "height=500, width=500");
       schedule.document.write("<html>");
       schedule.document.write("<body > <h1>Schedule<br>");
+<<<<<<< HEAD
       schedule.document.write("<table style = \"tex-align: left\">");
       schedule.document.write(header)
       schedule.document.write("<tbody>")
       schedule.document.write(tableBody)
       schedule.document.write("</tbody>")
       schedule.document.write("</table>")
+=======
+      schedule.document.write("<table>");
+      schedule.document.write(header);
+      schedule.document.write("<tbody>");
+      schedule.document.write(tableBody);
+      schedule.document.write("</tbody>");
+      schedule.document.write("</table>");
+>>>>>>> 34137b9efde900975a3ec7d25988d00be3c7cc62
       schedule.document.write("</body></html>");
       schedule.document.close();
       schedule.print();
       this.showButton = true;
     },
     createScheduleRows() {
-      let tableBody = ""; 
-      this.potholes.forEach(pothole => {
-        tableBody += "<tr>"
+      let tableBody = "";
+      this.potholes.forEach((pothole) => {
+        tableBody += "<tr>";
         tableBody += `<td>${pothole.employeeFirstName} ${pothole.employeeLastName}</td>`;
         tableBody += `<td>${pothole.dateReported}</td>`;
         tableBody += `<td>${pothole.repairDate}</td>`;
         tableBody += `<td>${pothole.crossStreet1} & ${pothole.crossStreet2}</td>`;
         tableBody += `<td>${pothole.severity}</td>`;
-        tableBody += "</tr>"
-      })
-      
+        tableBody += "</tr>";
+      });
+
       return tableBody;
-    }
+    },
   },
   created() {
     this.getEmployees();
