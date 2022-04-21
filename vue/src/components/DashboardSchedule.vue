@@ -139,7 +139,7 @@ export default {
       const schedule = window.open("", "", "height=500, width=500");
       schedule.document.write("<html>");
       schedule.document.write("<body > <h1>Schedule<br>");
-      schedule.document.write("<table>");
+      schedule.document.write("<table style = \"tex-align: left\">");
       schedule.document.write(header)
       schedule.document.write("<tbody>")
       schedule.document.write(tableBody)
@@ -157,7 +157,7 @@ export default {
         tableBody += `<td>${pothole.employeeFirstName} ${pothole.employeeLastName}</td>`;
         tableBody += `<td>${pothole.dateReported}</td>`;
         tableBody += `<td>${pothole.repairDate}</td>`;
-        tableBody += `<td>${pothole.crossStreet1} ${pothole.crossStreet2}</td>`;
+        tableBody += `<td>${pothole.crossStreet1} & ${pothole.crossStreet2}</td>`;
         tableBody += `<td>${pothole.severity}</td>`;
         tableBody += "</tr>"
       })
