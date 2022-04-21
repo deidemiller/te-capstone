@@ -141,21 +141,12 @@ export default {
       const schedule = window.open("", "", "height=500, width=500");
       schedule.document.write("<html>");
       schedule.document.write("<body > <h1>Schedule<br>");
-<<<<<<< HEAD
-      schedule.document.write("<table style = \"tex-align: left\">");
-      schedule.document.write(header)
-      schedule.document.write("<tbody>")
-      schedule.document.write(tableBody)
-      schedule.document.write("</tbody>")
-      schedule.document.write("</table>")
-=======
       schedule.document.write("<table>");
       schedule.document.write(header);
       schedule.document.write("<tbody>");
       schedule.document.write(tableBody);
       schedule.document.write("</tbody>");
       schedule.document.write("</table>");
->>>>>>> 34137b9efde900975a3ec7d25988d00be3c7cc62
       schedule.document.write("</body></html>");
       schedule.document.close();
       schedule.print();
