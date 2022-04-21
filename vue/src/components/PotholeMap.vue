@@ -134,7 +134,7 @@
                     "I should avoid that next time"
                   </option>
 
-                  <option value="high">"Oh Shit!"</option>
+                  <option value="high">"Oh @#&%!"</option>
                 </select>
               </div>
               <div>
@@ -186,7 +186,7 @@
         </div>
       </div>
       <div id="map">
-        <div class="alert" v-if="showAlert">
+        <div class="alert" id = "alert" v-if="showAlert">
           <h6>
             This has been successfully added! Thank you for helping make our
             roads safer!
@@ -324,7 +324,7 @@ export default {
     submitForm() {
       PotholeService.add(this.newPothole).then((response) => {
         if (response.status === 201 || response.status === 200) {
-          console.log("success");
+          
           if (!this.showPending) {
             this.getPotholes();
           } else {
@@ -342,6 +342,9 @@ export default {
       });
       this.showForm = false;
       this.add = true;
+      
+      
+      setTimeout(() => this.showAlert = false, 3000)
     },
     clearForm() {
       this.newPothole = {};
