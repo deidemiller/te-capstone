@@ -195,6 +195,12 @@
             <font-awesome-icon icon="fa-solid fa-xmark" />
           </button>
         </div>
+        <button v-on:click="getCurrentLocation" class="geolocation">
+          <font-awesome-icon
+            icon="fa-solid fa-location-arrow"
+            class="location"
+          />
+        </button>
         <l-map
           v-on:click="onMapClick"
           style="width: 100%"
@@ -246,6 +252,7 @@ export default {
       attribution:
         '&copy; <a target="_blank" href="http://osm.org/copyright">OpenStreetMap</a> contributors',
       zoom: 13,
+
       center: [39.961178, -82.998795],
       pothole: {
         potholeId: "",
@@ -254,6 +261,7 @@ export default {
         longitude: "",
         imageUrl: "",
       },
+      located: false,
       showAlert: false,
       potholes: [],
       showForm: false,
@@ -267,6 +275,22 @@ export default {
     };
   },
   methods: {
+    getCurrentLocation() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(this.showPosition);
+      } else {
+        alert("Geolocation is not supported by this browser.");
+      }
+    },
+    showPosition(position) {
+      if (this.located == false) {
+        this.center = [position.coords.latitude, position.coords.longitude];
+        this.located = true;
+      } else {
+        this.center = [39.961178, -82.998795];
+        this.located = false;
+      }
+    },
     getPotholes() {
       PotholeService.list().then((response) => {
         this.potholes = response.data;
@@ -340,6 +364,19 @@ export default {
 </script>
 
 <style scoped>
+.geolocation {
+  position: absolute;
+  height: 40px;
+  width: 40px;
+  top: 10%;
+  left: 27%;
+  z-index: 1000;
+  background-color: white;
+  cursor: pointer;
+}
+.location {
+  font-size: 2em;
+}
 .alert {
   background-color: #f55353;
   height: 3%;
@@ -631,6 +668,16 @@ img {
   }
   .pothole-form {
     margin-bottom: 0;
+  }
+  .geolocation {
+    position: absolute;
+    height: 40px;
+    width: 40px;
+    top: 20%;
+    left: 2%;
+    z-index: 1000;
+    background-color: white;
+    cursor: pointer;
   }
 }
 </style>
