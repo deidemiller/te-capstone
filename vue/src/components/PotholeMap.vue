@@ -195,7 +195,7 @@
             <font-awesome-icon icon="fa-solid fa-xmark" />
           </button>
         </div>
-        <button v-on:click="getCurrentLocation" class="geolocation">
+        <button v-on:click="getCurrentLocation" class="geolocation" v-if="showForm === false">
           <font-awesome-icon
             icon="fa-solid fa-location-arrow"
             class="location"
@@ -621,6 +621,7 @@ img {
 .top-bar {
   display: none;
 }
+
 @media screen and (max-width: 426px) {
   img {
     width: 5em;
@@ -668,6 +669,7 @@ img {
   .top-form form {
     background-color: rgba(0, 0, 0, 0.05);
     padding: 3em;
+    z-index: 2000;
   }
   .pothole-form {
     margin-bottom: 0;

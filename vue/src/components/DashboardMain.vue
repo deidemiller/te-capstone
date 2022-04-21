@@ -48,7 +48,7 @@
         <div class="content-2">
           <div class="recent">
             <div class="title">
-              <h2>Recent Projects</h2>
+              <h2>Pending Verification</h2>
               <button class="button-64" role="button">
                 <span class="text">View All</span>
               </button>
