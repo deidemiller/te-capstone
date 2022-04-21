@@ -12,9 +12,9 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="employee in employees" v-bind:key="employee.employeeId">
+            <tr v-for="employee in employees" v-bind:key="employee.employeeId" >
               <td>{{ employee.title }}</td>
-              <td><img src="../assets/images/e1.jpg" alt="" /></td>
+              <td><img v-bind:src="employee.imageUrl" alt="" v-if="employee.imageUrl != null" /></td>
               <td>{{ employee.firstName }} {{ employee.lastName }}</td>
               <td>
                 <button

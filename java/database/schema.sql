@@ -18,6 +18,7 @@ CREATE TABLE employee (
 	first_name varchar (64) NOT NULL,
 	last_name varchar (64) NOT NULL,
 	title varchar (32) NOT NULL,
+	image_url varchar(128),
 	CONSTRAINT PK_employee PRIMARY KEY (employee_id)
 );
 
@@ -57,10 +58,10 @@ INSERT INTO users (username,password_hash,role) VALUES ('Dustin','$2a$08$UkVvwpU
 INSERT INTO users (username,password_hash,role) VALUES ('Katherine','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','ROLE_ADMIN');
 INSERT INTO users (username,password_hash,role) VALUES ('John','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','ROLE_ADMIN');
 
-INSERT INTO employee(first_name, last_name, title) VALUES ('Steve', 'Carmichael', 'Bossman');
-INSERT INTO employee(first_name, last_name, title) VALUES ('Matt', 'Eland', 'Road Service Specialist');
-INSERT INTO employee(first_name, last_name, title) VALUES ('John', 'Fulton', 'Road Service Specialist');
-INSERT INTO employee(first_name, last_name, title) VALUES ('Brian', 'Lauvray', 'Road Service Specialist');
+INSERT INTO employee(first_name, last_name, title, image_url) VALUES ('Steve', 'Carmichael', 'Bossman', 'https://ik.imagekit.io/q6zdnk39roo/Untitled_design__6__m1ZwdDvEk.png?ik-sdk-version=javascript-1.4.3&updatedAt=1650566382651');
+INSERT INTO employee(first_name, last_name, title, image_url) VALUES ('Matt', 'Eland', 'Road Service Specialist', 'https://ik.imagekit.io/q6zdnk39roo/Untitled_design__7__eQP8OxOmo.png?ik-sdk-version=javascript-1.4.3&updatedAt=1650566394318');
+INSERT INTO employee(first_name, last_name, title, image_url) VALUES ('John', 'Fulton', 'Road Service Specialist', 'https://ik.imagekit.io/q6zdnk39roo/Untitled_design_aEz66kcTB.png?ik-sdk-version=javascript-1.4.3&updatedAt=1650564443766');
+INSERT INTO employee(first_name, last_name, title, image_url) VALUES ('Brian', 'Lauvray', 'Road Service Specialist', 'https://ik.imagekit.io/q6zdnk39roo/Untitled_design__5__Dx6oDgyi-.png?ik-sdk-version=javascript-1.4.3&updatedAt=1650566224440');
 
 INSERT INTO pothole (date_reported, latitude, longitude, image_location, cross_street_1, cross_street_2, contact_name, contact_email, contact_phone, pending, severity, repair_status, inspected, showDetails) VALUES ('2022-04-09', 39.938010, -82.992751, 'https://ik.imagekit.io/q6zdnk39roo/ian-taylor-cZokzzlC3KM-unsplash_UPdf2JpA8.jpg?ik-sdk-version=javascript-1.4.3&updatedAt=1649534868646', '4th St', 'E Gates St', 'John Doe', 'john_doe@aol.com', '555-555-5555', false, 'low', 'unscheduled', false, false);
 

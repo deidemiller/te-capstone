@@ -23,7 +23,7 @@ public class JdbcEmployeeDao implements EmployeeDao {
     @Override
     public List<Employee> getEmployees() {
         List<Employee> employees = new ArrayList<>();
-        String sql = "SELECT employee_id, first_name, last_name, title FROM employee";
+        String sql = "SELECT employee_id, first_name, last_name, title, image_url FROM employee";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
         while (results.next()) {
             Employee employee = new Employee();
@@ -31,6 +31,7 @@ public class JdbcEmployeeDao implements EmployeeDao {
             employee.setFirstName(results.getString("first_name"));
             employee.setLastName(results.getString("last_name"));
             employee.setTitle(results.getString("title"));
+            employee.setImageUrl(results.getString("image_url"));
             employees.add(employee);
         }
         return employees;
